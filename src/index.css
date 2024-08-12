@@ -1,3 +1,89 @@
-:root {
-  --color-red: #ff0000;
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans";
+}
+
+a, a:hover {
+  text-decoration: none;
+  color: unset;
+}
+
+html, body {
+  background-color: #000;
+}
+
+/*-------------header-------------*/
+
+.airline-header {
+  color: #87CEEB;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #102347 0%, #181818 100%);
+}
+
+.airline-header-logo {
+  width: 53%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.airline-header-login {
+  width: 47%;
+  display: flex;
+  justify-content: right;
+  padding-right: 20px;
+}
+
+/*---------main------------*/
+
+.airline-main {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  color: #FFF;
+}
+
+.airline-card-reservation {
+  background-color: #000;
+  padding: 15px 20px;
+  width: 800px;
+  height: 200px;
+  color: #FFF;
+  border: 3px solid #181818;
+  border-radius: 20px;
+}
+
+.airline-one-way-select {
+  padding-top: 20px;
+  display: flex;
+}
+
+.airline-round-trip-select {
+  padding-bottom: 20px;
+  display: flex;
+}
+
+.airline-destination-select {
+  display: flex;
+}
+
+.airline-destination-select p {
+  padding-right: 5px;
+}
+
+.airline-destination-select-space {
+  padding: 0px 10px;
+  display: flex;
+}
+
+.airline-icon-destination {
+  padding-right: 5px;
+  color: #87CEEB;
 }
