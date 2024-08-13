@@ -24,6 +24,10 @@ html, body {
   padding-right: 10px;
 }
 
+.padding-top-10 {
+  padding-top: 10px;
+}
+
 .airline-button {
   width: 200px;
   height: 42px;
@@ -164,4 +168,56 @@ html, body {
 
 .airline-flight-card-destination {
   display: flex;
+}
+
+/*------------payment------------*/
+
+.airline-payment-section {
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.airline-payment-personal-data {
+  width: 300px;
+  height: 150px;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #181818;
+  border-radius: 8px;
+  background-color: #111111;
+}
+
+.airline-payment-text {
+  padding: 20px 0px;
+  width: 800px;
+  display: flex;
+  justify-content: left;
+}
+
+.airline-payment-value-total {
+  width: 150px;
+  padding: 5px;
+  margin-left: 520px;
+  background-color: #111111;
+  display: flex;
+  justify-content: center;
+  border: 3px solid #181818;
+  border-radius: 8px;
+}
+
+/*--------------buy-confirmation------------*/
+
+.airline-buy-confirmation-text {
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 700;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
