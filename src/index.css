@@ -170,6 +170,18 @@ html, body {
   display: flex;
 }
 
+.airline-flight-min-card-details {
+  width: 800px;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: 3px solid #181818;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  background-color: #111111;
+  display: flex;
+  justify-content: space-around;
+}
+
 /*------------payment------------*/
 
 .airline-payment-section {
@@ -220,4 +232,110 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/*-----------client-area-------------------*/
+
+.airline-main-client {
+  display: flex;
+}
+
+.airline-section-client-data {
+  color: #FFF;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 700px;
+  border-right: 3px solid #181818;
+
+}
+
+.airline-section-client-data input {
+  background-color: #111111;
+  color: #c9c9c9;
+  border: 3px solid #181818;
+  border-radius: 8px;
+  width: 200px;
+  padding: 5px 10px;
+}
+
+.airline-client-data-card {
+  padding: 20px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.airline-client-data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0px;
+}
+
+.airline-client-edit-data {
+  width: 262px;
+  height:40px;
+  font-size: 12px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #87CEEB;
+  background-color: #181818;
+  border: 2px solid #87CEEB;
+  border-radius: 8px;
+}
+
+.airline-client-edit-data p {
+  padding-right: 5px;
+}
+
+.airline-client-edit-data-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.airline-client-next-flights {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFF;
+  width: 1100px;
+}
+
+.airline-client-next-flights h3 {
+  padding-bottom: 20px;
+}
+
+.airline-client-next-flights-card {
+  display: flex;
+  justify-content: center;
+}
+
+.airline-client-checkin-flight {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #87CEEB;
+  width: 150px;
+  height: 70px;
+  border: 3px solid #181818;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  cursor: pointer;
+}
+
+.airline-client-checkin-flight h4 {
+  font-size: 16 px;
+}
+
+.airline-client-checkin-flight p {
+  font-size: 12px;
 }
