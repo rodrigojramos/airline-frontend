@@ -5,6 +5,9 @@ import { Flights } from './routes/ClientHome/Flights'
 import { Payment } from './routes/ClientHome/Payment'
 import { BuyConfirmation } from './routes/ClientHome/BuyConfirmation'
 import { ClientArea } from './routes/ClientHome/ClientArea'
+import { CheckIn } from './routes/ClientHome/CheckIn'
+import { Admin } from './routes/Admin'
+import { AdminArea } from './routes/Admin/AdminArea'
 
 
 export function App() {
@@ -17,6 +20,10 @@ export function App() {
           <Route path="payment" element={<Payment />} />
           <Route path="buy-confirmation" element={<BuyConfirmation />} />
           <Route path="client-area" element={<ClientArea />} />
+          <Route path="check-in" element={<CheckIn />} />
+        </Route>
+        <Route path="/admin" element={<Admin />}>
+          <Route index element={<AdminArea />} />
         </Route>
       </Routes>
     </BrowserRouter>

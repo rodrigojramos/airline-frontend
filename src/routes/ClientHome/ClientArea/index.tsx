@@ -1,4 +1,4 @@
-import { Pencil } from "lucide-react";
+import { Pencil, Ticket } from "lucide-react";
 import { MinFlightCard } from "../../../components/MinFlightCard";
 
 export function ClientArea() {
@@ -43,20 +43,35 @@ export function ClientArea() {
             <section className="airline-client-next-flights">
                 <h3>SEUS PRÓXIMOS VOOS</h3>
                 <div className="airline-client-next-flights-card">
-                    <MinFlightCard />
-                    <div className="airline-client-checkin-flight">
-                        <h4>Check-in</h4>
-                        <p>ON</p>
+                    <div className="airline-client-ticket">
+                        <Ticket />
+                        <h4>TICKET AIRLINE</h4>
+                        <Ticket />
+                    </div>
+                    <div className="airline-client-checkin-div">
+                        <MinFlightCard />
+                        <div className="airline-client-checkin-flight">
+                            <h4>Check-in</h4>
+                            <p>ON</p>
+                        </div>
                     </div>
                 </div>
 
                 <div className="airline-client-next-flights-card">
-                    <MinFlightCard />
-                    <div className="airline-client-checkin-flight">
-                        <h4>Check-in</h4>
-                        <p>ON</p>
+                    <div className="airline-client-ticket">
+                        <Ticket />
+                        <h4>TICKET AIRLINE</h4>
+                        <Ticket />
+                    </div>
+                    <div className="airline-client-checkin-div">
+                        <MinFlightCard />
+                        <div className="airline-client-checkin-flight">
+                            <h4>Check-in</h4>
+                            <p>ON</p>
+                        </div>
                     </div>
                 </div>
+
             </section>
         </main>
         

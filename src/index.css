@@ -44,7 +44,7 @@ html, body {
   background-color: #181818;
 }
 
-/*-------------HeaderClient-------------*/
+/*-------------Headers-------------*/
 
 .airline-header {
   color: #87CEEB;
@@ -67,6 +67,16 @@ html, body {
   display: flex;
   justify-content: right;
   padding-right: 20px;
+}
+
+.airline-header-login p {
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.airline-header-admin {
+  padding: 10px;
+  font-weight: 700;
 }
 
 /*---------SetTrip------------*/
@@ -175,7 +185,6 @@ html, body {
   padding: 20px;
   margin-bottom: 10px;
   border: 3px solid #181818;
-  border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   background-color: #111111;
   display: flex;
@@ -316,6 +325,8 @@ html, body {
 .airline-client-next-flights-card {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .airline-client-checkin-flight {
@@ -326,8 +337,8 @@ html, body {
   background-color: #87CEEB;
   width: 150px;
   height: 70px;
-  border: 3px solid #181818;
-  border-top-right-radius: 12px;
+  border-right: 3px solid #181818;
+  border-bottom: 3px solid #181818;
   border-bottom-right-radius: 12px;
   cursor: pointer;
 }
@@ -338,4 +349,155 @@ html, body {
 
 .airline-client-checkin-flight p {
   font-size: 12px;
+}
+
+.airline-client-checkin-div {
+  display: flex;
+}
+
+.airline-client-ticket {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  width: 950px;
+  height: 34px;
+  background-color: #C9C9C9;
+  border-right: 3px solid #181818;
+  border-left: 3px solid #181818;
+  border-top: 3px solid #181818;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  color: #000;
+}
+
+/*----------------Check-in------------------*/
+
+.airline-section-checkin-plane {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+.airline-plane-seats {
+  width: 220px;
+  height: 420px;
+  background-color: #181818;
+  border: 3px solid #87CEEB;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.airline-plane-seats-row {
+  display: flex;
+  justify-content:space-between;
+}
+
+.airline-plane-seats-row-display {
+  display: flex;
+  justify-content: space-between;
+  width: 90px;
+  padding: 10px;
+}
+
+.airline-plane-seats-a {
+  background-color: #87CEEB;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.airline-title-checkin-plane {
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.airline-title-checkin-plane h1 {
+  color: #87CEEB;
+}
+
+/*----------------AdminArea---------------*/
+
+.airline-admin-area-main {
+  display: flex;
+  justify-content: center;
+}
+
+.airline-admin-area {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFF;
+  width: 1100px;
+}
+
+.airline-admin-area h3 {
+  padding-bottom: 20px;
+}
+
+.airline-admin-area-card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.airline-admin-area-title-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  width: 950px;
+  height: 34px;
+  background-color: #C9C9C9;
+  border-right: 3px solid #181818;
+  border-left: 3px solid #181818;
+  border-top: 3px solid #181818;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  color: #000;
+}
+
+.airline-admin-area-flight-card {
+  display: flex;
+}
+
+.airline-admin-area-list-flight-card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #51C3F0;
+  width: 150px;
+  height: 70px;
+  border-right: 3px solid #181818;
+  border-bottom: 3px solid #181818;
+  border-bottom-right-radius: 12px;
+  cursor: pointer;
+  color: #000;
+}
+
+/*#51C3F0*/
+
+.airline-admin-area-list-flight-card p {
+  font-size: 12px;
+}
+
+.airline-admin-area-title {
+  display: flex;
+  justify-content: left;
+  padding-left: 20px;
+  width: 950px;
 }
