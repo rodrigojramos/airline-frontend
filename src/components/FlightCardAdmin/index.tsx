@@ -1,4 +1,5 @@
 import { MoveRight, NotebookText } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function FlightCardAdmin() {
     return (
@@ -12,7 +13,9 @@ export function FlightCardAdmin() {
                 <p>Horário: 15:30</p>
                 <p>Lugares: 12/180</p>
                 <div className="airline-all-flights-card-icon">
-                    <NotebookText />
+                    <Link to="/admin/passenger-list">
+                        <NotebookText />
+                    </Link>
                 </div>
             </div>
 
@@ -25,7 +28,9 @@ export function FlightCardAdmin() {
                 <p>Horário: 15:30</p>
                 <p>Lugares: 12/180</p>
                 <div className="airline-all-flights-card-icon">
-                    <NotebookText />
+                    <Link to="/admin/passenger-list">
+                        <NotebookText />
+                    </Link>
                 </div>
             </div>
 
@@ -38,7 +43,9 @@ export function FlightCardAdmin() {
                 <p>Horário: 15:30</p>
                 <p>Lugares: 12/180</p>
                 <div className="airline-all-flights-card-icon">
-                    <NotebookText />
+                    <Link to="/admin/passenger-list">
+                        <NotebookText />
+                    </Link>
                 </div>
             </div>
         </div>

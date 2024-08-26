@@ -1,4 +1,5 @@
 import { MoveRight, NotebookText, Pencil, Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function AllFlightsCard() {
     return (
@@ -12,7 +13,9 @@ export function AllFlightsCard() {
             <p>Lugares: 12/180</p>
             <div className="airline-all-flights-card-icons">
                 <div className="airline-all-flights-card-icon">
-                    <NotebookText />
+                    <Link to="/admin/passenger-list">
+                        <NotebookText />
+                    </Link>
                 </div>
                 <div className="airline-all-flights-card-icon">
                     <Pencil />

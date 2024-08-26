@@ -1,5 +1,6 @@
 import { ArrowBigRight } from "lucide-react";
 import { FlightCard } from "../../../components/FlightCard";
+import { Link } from "react-router-dom";
 
 export function Flights() {
     return (
@@ -34,9 +35,11 @@ export function Flights() {
                     <FlightCard />
                     <FlightCard />
                 </div>
-                <div className="airline-button">
-                    <p>Confirmar passagem</p>
-                </div>
+                <Link to="/payment">
+                    <div className="airline-button">
+                        <p>Confirmar passagem</p>
+                    </div>
+                </Link>
             </section>
         </main>
     )

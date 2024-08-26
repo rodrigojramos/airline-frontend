@@ -1,4 +1,5 @@
 import { Plane } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function HeaderAdmin() {
   return(
@@ -9,12 +10,20 @@ export function HeaderAdmin() {
         </div>
         <div className="airline-header-logo">
           <Plane />
-          <h2>AIRLINE</h2>
+          <Link to="/admin">
+            <h2>AIRLINE</h2>
+          </Link>
         </div>
         <div className="airline-header-login">
-          <p>Início</p>
-          <p>Voos</p>
+          <Link to="/admin">
+            <p>Início</p>
+          </Link>
+          <Link to="/admin/flights">
+            <p>Voos</p>
+          </Link>
+          <Link to="/admin/planes">
           <p>Aviões</p>
+          </Link>
           <a href="#">Login</a>
         </div>
       </div>

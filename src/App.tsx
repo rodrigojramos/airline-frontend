@@ -10,6 +10,7 @@ import { Admin } from './routes/Admin'
 import { AdminArea } from './routes/Admin/AdminArea'
 import { AllFlights } from './routes/Admin/AllFlights'
 import { Planes } from './routes/Admin/Planes'
+import { PassengerList } from './routes/Admin/PassengerList'
 
 
 export function App() {
@@ -28,6 +29,7 @@ export function App() {
           <Route index element={<AdminArea />} />
           <Route path="flights" element={<AllFlights />} />
           <Route path="planes" element={<Planes />} />
+          <Route path="passenger-list" element={<PassengerList />} />
         </Route>
       </Routes>
     </BrowserRouter>

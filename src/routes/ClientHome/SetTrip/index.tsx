@@ -1,4 +1,5 @@
 import { CalendarDays, PlaneLanding, PlaneTakeoff } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function SetTrip() {
     return(
@@ -33,9 +34,11 @@ export function SetTrip() {
                     <input type="text" />
                 </div>
             </div>
-            <div className="airline-button">
-                <p>Procurar passagem</p>
-            </div>
+            <Link to="/flights">
+                <div className="airline-button">
+                    <p>Procurar passagem</p>
+                </div>
+            </Link>
         </main>
     )
 }

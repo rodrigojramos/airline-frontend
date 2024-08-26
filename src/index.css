@@ -247,6 +247,20 @@ html, body {
   align-items: center;
 }
 
+.airline-buy-confirmarion-button {
+  display: flex;
+  justify-content: center;
+  padding: 6px;
+  margin-top: 20px;
+  width: 100px;
+  background-color: #181818;
+  color: #87CEEB;
+  border: 2px solid #87CEEB;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
 /*-----------client-area-------------------*/
 
 .airline-main-client {
@@ -591,4 +605,69 @@ html, body {
   cursor: pointer;
   color: #87CEEB;
   font-size: 12px;
+}
+
+/*------------------Passenger-List---------------*/
+
+.airline-passenger-list-section {
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.airline-passenger-list-title {
+  color: #FFF;
+}
+
+.airline-passenger-list-card {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 700px;
+}
+
+.airline-passenger-list-flight-reference{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 30px;
+  font-size: 12px;
+  border-top: 2px solid #87CEEB;
+  border-right: 2px solid #87CEEB;
+  border-left: 2px solid #87CEEB;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.airline-passenger-list-flight {
+  width: 700px;
+  border-bottom: 2px solid #87CEEB;
+  border-right: 2px solid #87CEEB;
+  border-left: 2px solid #87CEEB;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.airline-passenger-list-name {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  width: 680px;
+  border-bottom: 2px solid #181818;
+}
+
+.airline-passenger-list-card-name {
+  display: flex;
+  justify-content: center;
+}
+
+.airline-passenger-list-flight-destination {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+}
+
+.airline-passenger-list-icon {
+  size: 40px;
 }

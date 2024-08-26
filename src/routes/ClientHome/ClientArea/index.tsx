@@ -1,5 +1,6 @@
 import { Pencil, Ticket } from "lucide-react";
 import { MinFlightCard } from "../../../components/MinFlightCard";
+import { Link } from "react-router-dom";
 
 export function ClientArea() {
     return (
@@ -50,10 +51,12 @@ export function ClientArea() {
                     </div>
                     <div className="airline-client-checkin-div">
                         <MinFlightCard />
-                        <div className="airline-client-checkin-flight">
-                            <h4>Check-in</h4>
-                            <p>ON</p>
-                        </div>
+                        <Link to="/check-in">
+                            <div className="airline-client-checkin-flight">
+                                <h4>Check-in</h4>
+                                <p>ON</p>
+                            </div>
+                        </Link>
                     </div>
                 </div>
 
@@ -65,10 +68,12 @@ export function ClientArea() {
                     </div>
                     <div className="airline-client-checkin-div">
                         <MinFlightCard />
-                        <div className="airline-client-checkin-flight">
-                            <h4>Check-in</h4>
-                            <p>ON</p>
-                        </div>
+                        <Link to="/check-in">
+                            <div className="airline-client-checkin-flight">
+                                <h4>Check-in</h4>
+                                <p>ON</p>
+                            </div>
+                        </Link>
                     </div>
                 </div>
 

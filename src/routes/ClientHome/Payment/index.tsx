@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FlightCard } from "../../../components/FlightCard";
 
 export function Payment() {
@@ -21,9 +22,11 @@ export function Payment() {
                     <p className="padding-top-10">CPF:</p>
                     <input type="text" />
                 </div>
-                <div className="airline-button">
-                    <p>Confirmar pagamento</p>
-                </div>
+                <Link to="/buy-confirmation">
+                    <div className="airline-button">
+                        <p>Confirmar pagamento</p>
+                    </div>
+                </Link>
             </section>
         </main>
     )
