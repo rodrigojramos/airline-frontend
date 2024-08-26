@@ -8,6 +8,8 @@ import { ClientArea } from './routes/ClientHome/ClientArea'
 import { CheckIn } from './routes/ClientHome/CheckIn'
 import { Admin } from './routes/Admin'
 import { AdminArea } from './routes/Admin/AdminArea'
+import { AllFlights } from './routes/Admin/AllFlights'
+import { Planes } from './routes/Admin/Planes'
 
 
 export function App() {
@@ -24,6 +26,8 @@ export function App() {
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminArea />} />
+          <Route path="flights" element={<AllFlights />} />
+          <Route path="planes" element={<Planes />} />
         </Route>
       </Routes>
     </BrowserRouter>

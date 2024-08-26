@@ -20,6 +20,10 @@ html, body {
   padding-left: 10px;
 }
 
+.padding-left-30 {
+  padding-left: 30px;
+}
+
 .padding-right-10 {
   padding-right: 10px;
 }
@@ -127,7 +131,7 @@ html, body {
   color: #87CEEB;
 }
 
-/*-------------Fights---------------*/
+/*-------------Flights---------------*/
 
 .airline-main-flights {
   display: flex;
@@ -446,6 +450,10 @@ html, body {
   padding-bottom: 20px;
 }
 
+.airline-admin-area h4 {
+  font-size: 18px;
+}
+
 .airline-admin-area-card {
   display: flex;
   justify-content: center;
@@ -453,43 +461,6 @@ html, body {
   align-items: center;
   padding-bottom: 20px;
 }
-
-.airline-admin-area-title-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
-  width: 950px;
-  height: 34px;
-  background-color: #C9C9C9;
-  border-right: 3px solid #181818;
-  border-left: 3px solid #181818;
-  border-top: 3px solid #181818;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  color: #000;
-}
-
-.airline-admin-area-flight-card {
-  display: flex;
-}
-
-.airline-admin-area-list-flight-card {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  background-color: #51C3F0;
-  width: 150px;
-  height: 70px;
-  border-right: 3px solid #181818;
-  border-bottom: 3px solid #181818;
-  border-bottom-right-radius: 12px;
-  cursor: pointer;
-  color: #000;
-}
-
-/*#51C3F0*/
 
 .airline-admin-area-list-flight-card p {
   font-size: 12px;
@@ -500,4 +471,124 @@ html, body {
   justify-content: left;
   padding-left: 20px;
   width: 950px;
+}
+
+/*----------------All-Flights--------------*/
+
+.airline-all-flights-main {
+  display: flex;
+  justify-content: center;
+}
+
+.airline-all-flights-section {
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding: 20px;
+  width: 980px;
+}
+
+.airline-all-flights-title {
+  margin-left: 20px;
+}
+
+.airline-all-flights-new-flight {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-left: 20px;
+  padding: 5px;
+  background-color: #111111;
+  width: 90px;
+  border: 2px solid #87CEEB;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #87CEEB;
+  font-size: 12px;
+}
+
+.airline-all-flights-card {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 20px;
+   background-color: #111111;
+   padding: 10px;
+   border: 3px solid #181818;
+   border-radius: 8px;
+}
+
+.airline-all-flights-destination {
+  display: flex;
+}
+
+.airline-all-flights-card-icons {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.airline-all-flights-card-icon {
+  cursor: pointer;
+  color: #87CEEB;
+}
+
+.airline-flight-card-admin {
+  width: 980px;
+}
+
+/*----------------Planes--------------*/
+
+.airline-planes-main {
+  display: flex;
+  justify-content: center;
+}
+
+.airline-planes-section {
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding: 20px;
+  width: 600px;
+}
+
+.airline-planes-title {
+  margin-left: 20px;
+}
+
+.airline-planes-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #111111;
+  border: 3px solid #181818;
+  border-radius: 8px;
+}
+
+.airline-planes-card-icons {
+  display: flex;
+  width: 80px;
+  justify-content: space-between;
+}
+
+.airline-planes-card-icon {
+  cursor: pointer;
+  color: #87CEEB;
+}
+
+.airline-planes-new-plane {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-left: 20px;
+  padding: 5px;
+  background-color: #111111;
+  width: 90px;
+  border: 2px solid #87CEEB;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #87CEEB;
+  font-size: 12px;
 }
