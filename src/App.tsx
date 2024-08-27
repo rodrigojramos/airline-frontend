@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { ClientHome } from './routes/ClientHome'
 import { SetTrip } from './routes/ClientHome/SetTrip'
 import { Flights } from './routes/ClientHome/Flights'
@@ -11,6 +11,7 @@ import { AdminArea } from './routes/Admin/AdminArea'
 import { AllFlights } from './routes/Admin/AllFlights'
 import { Planes } from './routes/Admin/Planes'
 import { PassengerList } from './routes/Admin/PassengerList'
+import { Login } from './routes/ClientHome/Login'
 
 
 export function App() {
@@ -24,6 +25,7 @@ export function App() {
           <Route path="buy-confirmation" element={<BuyConfirmation />} />
           <Route path="client-area" element={<ClientArea />} />
           <Route path="check-in" element={<CheckIn />} />
+          <Route path="login" element={<Login />} />
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminArea />} />
@@ -31,6 +33,7 @@ export function App() {
           <Route path="planes" element={<Planes />} />
           <Route path="passenger-list" element={<PassengerList />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   )

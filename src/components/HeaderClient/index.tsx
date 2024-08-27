@@ -12,7 +12,9 @@ export function HeaderClient() {
           </Link>
         </div>
         <div className="airline-header-login">
-          <a href="#">Login</a>
+          <Link to="/login">
+            <p>Login</p>
+          </Link>
         </div>
       </div>
     </header>

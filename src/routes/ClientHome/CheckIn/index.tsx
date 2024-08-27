@@ -88,6 +88,9 @@ export function CheckIn() {
                         </div> 
                     </div>            
                 </div>
+                <div className="airline-confirmation-seat-button">
+                    Confirmar
+                </div>
             </section>
         </main>
     )

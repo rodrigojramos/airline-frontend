@@ -22,9 +22,11 @@ export function HeaderAdmin() {
             <p>Voos</p>
           </Link>
           <Link to="/admin/planes">
-          <p>Aviões</p>
+            <p>Aviões</p>
           </Link>
-          <a href="#">Login</a>
+          <Link to="/login">
+            <p>Login</p>
+          </Link>
         </div>
       </div>
     </header>
