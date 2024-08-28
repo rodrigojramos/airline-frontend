@@ -595,6 +595,13 @@ html, body {
   border-radius: 8px;
 }
 
+.airline-planes-card-name-and-seats p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+}
+
 .airline-planes-card-icons {
   display: flex;
   width: 80px;
@@ -783,5 +790,78 @@ html, body {
   color: #87CEEB;
   border: 2px solid #87CEEB;
   border-radius: 8px;
+  cursor: pointer;
+}
+
+/*--------------Dialog-----------*/
+
+.airline-dialog-background {
+  color: #FFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0, 0.8);
+}
+
+.airline-dialog-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #111111;
+  border: 3px solid #181818;
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.airline-dialog-box h2 {
+  font-size: 18px;
+}
+
+.airline-dialog-box-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 5px;
+  background-color: #87CEEB;
+  color: #181818;
+  border-radius: 4px;
+  width: 80px;
+  cursor: pointer;
+}
+
+.airline-dialog-confirmation-btn {
+  display: flex;
+
+}
+
+.airline-dialog-confirmation-btn-yes {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 5px;
+  background-color: #87CEEB;
+  color: #181818;
+  border-radius: 4px;
+  width: 80px;
+  cursor: pointer;
+}
+
+.airline-dialog-confirmation-btn-no {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 5px;
+  background-color: #87CEEB;
+  color: #181818;
+  border-radius: 4px;
+  width: 80px;
   cursor: pointer;
 }
