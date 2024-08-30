@@ -23,7 +23,7 @@ export function Planes() {
                     <h3>AVIÕES</h3>
                 </div>
                 <div className="airline-planes-new-plane">
-                    <p>Criar</p>
+                    <p>Novo</p>
                 </div>
 
                 {planes.map((plane => (

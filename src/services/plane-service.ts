@@ -1,23 +1,22 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { BASE_URL } from "../utils/system";
+import { AxiosRequestConfig } from "axios";
+import { requestBackend } from "../utils/requests";
 
 export function findAll() {
 
     const config : AxiosRequestConfig = {
         method: "GET",
-        baseURL: BASE_URL,
         url: "/plane"
     }
 
-    return axios(config);
+    return requestBackend(config);
 }
 
 export function deleteById(id: number) {
     const config : AxiosRequestConfig = {
         method: "DELETE",
-        baseURL: BASE_URL,
         url: `/plane/${id}`,
     }
 
-    return axios(config);
+    return requestBackend(config);
 }
+
