@@ -30,7 +30,7 @@ export function App() {
           <Route path="check-in" element={<CheckIn />} />
           <Route path="login" element={<Login />} />
         </Route>
-        <Route path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>}>
+        <Route path="/admin" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
           <Route index element={<AdminArea />} />
           <Route path="flights" element={<AllFlights />} />
           <Route path="planes" element={<Planes />} />
