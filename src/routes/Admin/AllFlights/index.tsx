@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import { AllFlightsCard } from "../../../components/AllFlightsCard";
 import { FlightDTO } from "../../../models/flight";
 import * as flightService from '../../../services/flight-service';
-import { isAuthenticated } from "../../../services/auth-service";
 
 export function AllFlights() {
 
     const [flights, setFlights] = useState<FlightDTO[]>([]);
 
     useEffect(() => {
-
-        console.log("Autenticado", isAuthenticated());
 
         flightService.findAll()
             .then(response => {

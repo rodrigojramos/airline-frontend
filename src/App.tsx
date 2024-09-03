@@ -14,6 +14,7 @@ import { PassengerList } from './routes/Admin/PassengerList'
 import { Login } from './routes/ClientHome/Login'
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom'
 import { history } from "./utils/history"
+import { PrivateRoute } from './components/PrivateRoute'
 
 
 export function App() {
@@ -29,7 +30,7 @@ export function App() {
           <Route path="check-in" element={<CheckIn />} />
           <Route path="login" element={<Login />} />
         </Route>
-        <Route path="/admin" element={<Admin />}>
+        <Route path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>}>
           <Route index element={<AdminArea />} />
           <Route path="flights" element={<AllFlights />} />
           <Route path="planes" element={<Planes />} />
