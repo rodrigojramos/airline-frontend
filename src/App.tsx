@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { ClientHome } from './routes/ClientHome'
 import { SetTrip } from './routes/ClientHome/SetTrip'
 import { Flights } from './routes/ClientHome/Flights'
@@ -12,11 +12,13 @@ import { AllFlights } from './routes/Admin/AllFlights'
 import { Planes } from './routes/Admin/Planes'
 import { PassengerList } from './routes/Admin/PassengerList'
 import { Login } from './routes/ClientHome/Login'
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom'
+import { history } from "./utils/history"
 
 
 export function App() {
   return(
-    <BrowserRouter>
+    <HistoryRouter history={history}>
       <Routes>
         <Route path="/" element={<ClientHome />}>
           <Route index element={<SetTrip />} />
@@ -35,6 +37,6 @@ export function App() {
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   )
 }
