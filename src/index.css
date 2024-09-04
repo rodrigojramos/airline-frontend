@@ -78,6 +78,16 @@ html, body {
   cursor: pointer;
 }
 
+.airline-header-login-settings {
+  display: flex;
+  justify-content: space-between;
+  width: 120px;
+}
+
+.airline-header-login-icon {
+   cursor: pointer;
+}
+
 .airline-header-admin {
   padding: 10px;
   font-weight: 700;

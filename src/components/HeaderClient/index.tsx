@@ -1,7 +1,13 @@
-import { Plane } from "lucide-react";
+import { Plane, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import * as authService from "../../services/auth-service";
+import { useContext } from "react";
+import { ContextToken } from "../../utils/contex-token";
 
 export function HeaderClient() {
+
+  const { contextTokenPayload } = useContext(ContextToken);
+
   return(
     <header>
       <div className="airline-header">
@@ -12,9 +18,20 @@ export function HeaderClient() {
           </Link>
         </div>
         <div className="airline-header-login">
-          <Link to="/login">
-            <p>Login</p>
-          </Link>
+          <div className="airline-header-login-settings">
+            {
+              contextTokenPayload &&
+              authService.hasAnyRoles(['ROLE_ADMIN']) &&
+              <Link to="/admin">
+              <div className="airline-header-login-icon">
+                <Settings />
+              </div>
+              </Link>
+            }
+            <Link to="/login">
+              <p>Login</p>
+            </Link>
+          </div>
         </div>
       </div>
     </header>

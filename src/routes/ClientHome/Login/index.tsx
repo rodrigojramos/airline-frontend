@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CredentialsDTO } from "../../../models/auth";
 import * as authService from "../../../services/auth-service"
+import { useNavigate } from "react-router-dom";
+import { ContextToken } from "../../../utils/contex-token";
 
 export function Login() {
+
+    const navigate = useNavigate();
+
+    const { setContextTokenPayload } = useContext(ContextToken);
 
     const [formData, setFormData] = useState<CredentialsDTO>({
         username: '',
@@ -15,6 +21,8 @@ export function Login() {
         authService.loginRequest(formData)
             .then(response => {
                 authService.saveAccessToken(response.data.access_token);
+                setContextTokenPayload(authService.getAccessTokenPayload());
+                navigate("/");
             })
             .catch(error => {
                 console.log("Erro no login", error)
