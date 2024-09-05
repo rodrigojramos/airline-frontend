@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { FlightCardAdmin } from "../../../components/FlightCardAdmin";
-import { UserDTO } from "../../../models/user";
-import * as userService from "../../../services/user-service"
+import { FlightDTO } from "../../../models/flight";
+import * as flightService from '../../../services/flight-service';
 
 export function AdminArea() {
 
-    const [user, setUser] = useState<UserDTO>();
+    const [flights, setFlights] = useState<FlightDTO[]>([]);
 
     useEffect(() => {
-        userService.findMe()
+
+        flightService.findAllTodayFlights()
             .then(response => {
-                setUser(response.data);
-                console.log(response.data);
-            });
+                setFlights(response.data);
+            })
     }, [])
 
     return (
@@ -20,12 +20,15 @@ export function AdminArea() {
             <section className="airline-admin-area">
                 <div className="airline-admin-area-title">
                     <div>
-                        <p>Bem vindo à área administrativa {user?.name}</p>
+                        <p>Bem vindo à área administrativa</p>
                         <h4>VOOS DO DIA</h4>
                     </div>
                 </div>
                 <div className="airline-admin-area-card">
-                    <FlightCardAdmin />
+                    {
+                        flights.map((flight => (
+                            <FlightCardAdmin key={flight.id} flight={flight}/>
+                    )))}
                 </div>
             </section>
         </main>

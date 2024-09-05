@@ -12,8 +12,6 @@ export function LoggedUser() {
         setContextTokenPayload(undefined);
     }
 
-    console.log(contextTokenPayload?.username);
-
     return (
         contextTokenPayload && authService.isAuthenticated()
         ? (

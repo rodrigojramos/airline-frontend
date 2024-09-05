@@ -12,6 +12,17 @@ export function findAll() {
     return axios(config);
 }
 
+export function findAllTodayFlights() {
+
+    const config : AxiosRequestConfig = {
+        method: "GET",
+        baseURL: BASE_URL,
+        url: "/flight/today-flights"
+    }
+
+    return axios(config);
+}
+
 export function deleteById(id: number) {
     const config : AxiosRequestConfig = {
         method: "DELETE",
