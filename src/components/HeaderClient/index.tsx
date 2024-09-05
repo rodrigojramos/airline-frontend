@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as authService from "../../services/auth-service";
 import { useContext } from "react";
 import { ContextToken } from "../../utils/contex-token";
+import { LoggedUser } from "../LoggedUser";
 
 export function HeaderClient() {
 
@@ -22,15 +23,11 @@ export function HeaderClient() {
             {
               contextTokenPayload &&
               authService.hasAnyRoles(['ROLE_ADMIN']) &&
-              <Link to="/admin">
-              <div className="airline-header-login-icon">
-                <Settings />
-              </div>
-              </Link>
+                <Link to="/admin">
+                  <Settings />
+                </Link>
             }
-            <Link to="/login">
-              <p>Login</p>
-            </Link>
+            <LoggedUser />
           </div>
         </div>
       </div>

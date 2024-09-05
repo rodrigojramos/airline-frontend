@@ -70,27 +70,32 @@ html, body {
   width: 46.5%;
   display: flex;
   justify-content: right;
-  padding-right: 20px;
+  margin-right: 20px;
 }
 
-.airline-header-login p {
-  margin-right: 30px;
-  cursor: pointer;
+.airline-header-login-organization {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
 }
 
 .airline-header-login-settings {
   display: flex;
   justify-content: space-between;
-  width: 120px;
-}
-
-.airline-header-login-icon {
-   cursor: pointer;
+  width: 150px;
+  padding-right: 10px;
 }
 
 .airline-header-admin {
   padding: 10px;
   font-weight: 700;
+}
+
+.airline-header-name {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*---------SetTrip------------*/
