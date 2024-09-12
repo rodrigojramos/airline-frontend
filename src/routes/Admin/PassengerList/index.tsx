@@ -1,6 +1,41 @@
+import { useEffect, useState } from "react";
 import { PassengerCard } from "../../../components/PassengerCard";
+import * as flightService from '../../../services/flight-service';
+import { FlightDTO } from "../../../models/flight";
+import { useParams } from "react-router-dom";
+import moment from "moment";
+import { UserDTO } from "../../../models/user";
 
 export function PassengerList() {
+
+    const params = useParams();
+
+    const [flight, setFlight ] = useState<FlightDTO>();
+
+    const [passengers, setPassengers] = useState<UserDTO[]>([])
+
+    const date = moment(flight?.flightDay).format('DD/MM/YYYY');
+
+    const time = moment(flight?.flightDay).format('HH:mm');
+
+    useEffect(() => {
+
+        flightService.findById(Number(params.flightId))
+            .then(response => {
+                console.log(response);
+                setFlight(response.data);
+            })
+    }, [])
+
+    useEffect(() => {
+
+        flightService.findPassengerList(Number(params.flightId))
+            .then(response => {
+                console.log(response);
+                setPassengers(response.data);
+            })
+    }, [])
+
     return(
         <main>
             <section className="airline-passenger-list-section">
@@ -10,29 +45,21 @@ export function PassengerList() {
                 <div className="airline-passenger-list-card">
                     <div>
                         <div className="airline-passenger-list-flight-reference">
-                            <p>Voo ID: 1</p>
+                            <p>Voo ID: {flight?.id}</p>
                             <div className="airline-passenger-list-flight-destination">
-                                <p>Uberlândia</p>
+                                <p className="padding-right-10">{flight?.departure}</p>
                                 <p>para</p>
-                                <p>São Paulo</p>
+                                <p className="padding-left-10">{flight?.arrival}</p>
                             </div>
-                            <p>20/11/2012</p>
-                            <p>15:30:00</p>
+                            <p>{date}</p>
+                            <p>{time}</p>
                         </div>
                         <div className="airline-passenger-list-flight">
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
-                            <PassengerCard />
+                            {
+                                passengers.map((passenger => (
+                                    <PassengerCard key={passenger.id} passenger={passenger}/>
+                                )))
+                            }
                         </div>
                     </div>
                 </div>

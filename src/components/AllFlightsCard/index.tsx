@@ -1,5 +1,5 @@
 import { MoveRight, NotebookText, Pencil, Trash2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FlightDTO } from "../../models/flight";
 import { useState } from "react";
 import * as flightService from '../../services/flight-service';
@@ -11,6 +11,8 @@ type Props = {
 }
 
 export function AllFlightsCard({ flight }: Props) {
+
+    const navigate = useNavigate();
 
     const [dialogInfoData, setDialogInfoData] = useState({
         visible: false,
@@ -54,6 +56,10 @@ export function AllFlightsCard({ flight }: Props) {
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const time = `${hours}:${minutes}`;
 
+    function handlePassengerListClick(flightId: number) {
+        navigate(`/admin/passenger-list/${flightId}`)
+    }
+
     return (
         <section>
             <div className="airline-all-flights-card">
@@ -66,9 +72,7 @@ export function AllFlightsCard({ flight }: Props) {
                 <p>Lugares livres: {flight.availableSeats}</p>
                 <div className="airline-all-flights-card-icons">
                     <div className="airline-all-flights-card-icon">
-                        <Link to="/admin/passenger-list">
-                            <NotebookText />
-                        </Link>
+                        <NotebookText onClick={() => handlePassengerListClick(flight.id)}/>
                     </div>
                     <div className="airline-all-flights-card-icon">
                         <Pencil />

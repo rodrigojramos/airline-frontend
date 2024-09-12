@@ -703,8 +703,9 @@ html, body {
 
 .airline-passenger-list-flight-destination {
   display: flex;
-  justify-content: space-between;
-  width: 150px;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
 }
 
 .airline-passenger-list-icon {

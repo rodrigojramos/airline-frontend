@@ -49,7 +49,7 @@ export function App() {
             <Route index element={<AdminArea />} />
             <Route path="flights" element={<AllFlights />} />
             <Route path="planes" element={<Planes />} />
-            <Route path="passenger-list" element={<PassengerList />} />
+            <Route path="passenger-list/:flightId" element={<PassengerList />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
