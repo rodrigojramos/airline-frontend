@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import { CredentialsDTO } from "../../../models/auth";
 import * as authService from "../../../services/auth-service"
 import { useNavigate } from "react-router-dom";
 import { ContextToken } from "../../../utils/contex-token";
+import { FormInput } from "../../../components/FormInput";
 
 export function Login() {
 
@@ -10,15 +10,34 @@ export function Login() {
 
     const { setContextTokenPayload } = useContext(ContextToken);
 
-    const [formData, setFormData] = useState<CredentialsDTO>({
-        username: '',
-        password: ''
-    })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [formData, setFormData] = useState<any>({
+        username: {
+          value: "",
+          id: "username",
+          name: "username",
+          type: "text",
+          placeholder: "Email",
+          validation: function (value: string) {
+            return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+              value.toLowerCase()
+            );
+          },
+          message: "Favor informar um email válido",
+        },
+        password: {
+          value: "",
+          id: "password",
+          name: "password",
+          type: "password",
+          placeholder: "Senha",
+        },
+      })
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function handleSubmit(event: any) {
         event.preventDefault();
-        authService.loginRequest(formData)
+        authService.loginRequest({username: formData.username.value, password: formData.password.value})
             .then(response => {
                 authService.saveAccessToken(response.data.access_token);
                 setContextTokenPayload(authService.getAccessTokenPayload());
@@ -33,7 +52,7 @@ export function Login() {
     function handleInputChange(event: any) {
         const value = event.target.value;
         const name = event.target.name;
-        setFormData({ ...formData, [name]: value});
+        setFormData({ ...formData, [name]: { ...formData[name], value: value}});
     }
 
     return (
@@ -43,20 +62,14 @@ export function Login() {
                     <div className="airline-login-card">
                         <h3>LOGIN</h3>
                         <div className="airline-login-username">
-                            <input 
-                                name="username"
-                                value={formData.username}
-                                type="text" 
-                                placeholder="Email"
+                            <FormInput
+                                { ...formData.username } 
                                 onChange={handleInputChange}
                             />
                         </div>
                         <div className="airline-login-password">
-                            <input 
-                                name="password"
-                                value={formData.password}
-                                type="password" 
-                                placeholder="Senha"
+                            <FormInput 
+                                { ...formData.password }
                                 onChange={handleInputChange}
                             />
                         </div>
