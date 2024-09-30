@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AllFlightsCard } from "../../../components/AllFlightsCard";
 import { FlightDTO } from "../../../models/flight";
 import * as flightService from '../../../services/flight-service';
+import { Link } from "react-router-dom";
 
 export function AllFlights() {
 
@@ -23,7 +24,9 @@ export function AllFlights() {
                     <h3>TODOS OS VOOS</h3>
                 </div>
                 <div className="airline-all-flights-new-flight">
-                    <p>Criar</p>
+                    <Link to="/admin/flights/new">
+                        <p>Novo</p>
+                    </Link>
                 </div>
                 {
                     flights.map((flight => (

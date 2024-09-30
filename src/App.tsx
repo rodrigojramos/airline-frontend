@@ -20,6 +20,7 @@ import { AccessTokenPayloadDTO } from './models/auth'
 import { ContextToken } from './utils/contex-token'
 import * as authService from "./services/auth-service"
 import { PlaneForm } from './routes/Admin/PlaneForm'
+import { FlightForm } from './routes/Admin/FlightForm'
 
 
 export function App() {
@@ -49,6 +50,7 @@ export function App() {
           <Route path="/admin" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
             <Route index element={<AdminArea />} />
             <Route path="flights" element={<AllFlights />} />
+            <Route path="flights/new" element={<FlightForm />} />
             <Route path="planes" element={<Planes />} />
             <Route path="planes/new" element={<PlaneForm />} />
             <Route path="passenger-list/:flightId" element={<PassengerList />} />
