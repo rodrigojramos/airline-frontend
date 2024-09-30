@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { PlaneCard } from "../../../components/PlaneCard";
 import { PlaneDTO } from "../../../models/plane";
 import * as planeService from '../../../services/plane-service';
+import { Link } from "react-router-dom";
 
 export function Planes() {
 
@@ -23,7 +24,9 @@ export function Planes() {
                     <h3>AVIÕES</h3>
                 </div>
                 <div className="airline-planes-new-plane">
-                    <p>Novo</p>
+                    <Link to="/admin/planes/new">
+                        <p>Novo</p>
+                    </Link>
                 </div>
 
                 {planes.map((plane => (

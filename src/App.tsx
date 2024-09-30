@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react'
 import { AccessTokenPayloadDTO } from './models/auth'
 import { ContextToken } from './utils/contex-token'
 import * as authService from "./services/auth-service"
+import { PlaneForm } from './routes/Admin/PlaneForm'
 
 
 export function App() {
@@ -49,6 +50,7 @@ export function App() {
             <Route index element={<AdminArea />} />
             <Route path="flights" element={<AllFlights />} />
             <Route path="planes" element={<Planes />} />
+            <Route path="planes/new" element={<PlaneForm />} />
             <Route path="passenger-list/:flightId" element={<PassengerList />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
