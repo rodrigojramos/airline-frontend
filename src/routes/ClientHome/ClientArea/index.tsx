@@ -36,10 +36,12 @@ export function ClientArea() {
                         />
                     </div>
                 </div>
-                <div className="airline-client-edit-data">
-                    <p>Editar algum campo</p>
-                    <Pencil className="airline-client-edit-data-icon"/>
-                </div>
+                <Link to="/client-area/personal-data">
+                    <div className="airline-client-edit-data">
+                        <p>Editar algum campo</p>
+                        <Pencil className="airline-client-edit-data-icon"/>
+                    </div>
+                </Link>
             </section>
             <section className="airline-client-next-flights">
                 <h3>SEUS PRÓXIMOS VOOS</h3>
