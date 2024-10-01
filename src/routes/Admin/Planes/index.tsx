@@ -12,7 +12,6 @@ export function Planes() {
 
         planeService.findAll()
             .then(response => {
-                console.log(response);
                 setPlanes(response.data);
             })
     }, [])

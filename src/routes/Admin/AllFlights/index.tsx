@@ -12,7 +12,6 @@ export function AllFlights() {
 
         flightService.findAll()
             .then(response => {
-                console.log(response);
                 setFlights(response.data);
             })
     }, [])

@@ -76,12 +76,14 @@ html, body {
 .airline-header-login-organization {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 300px;
 }
 
 .airline-header-login-settings {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 150px;
   padding-right: 10px;
 }
@@ -918,7 +920,34 @@ html, body {
   border: 3px solid #FFF;
 }
 
+.airline-form-input {
+  margin-bottom: 10px;
+  width: 250px;
+  padding: 10px;
+  outline: none;
+  border: 3px solid #FFF;
+}
+
+.airline-form-btns {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
 .airline-form-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 5px;
+  background-color: #181818;
+  color: #87CEEB;
+  border: 2px solid #87CEEB;
+  border-radius: 4px;
+  width: 80px;
+  cursor: pointer;
+}
+
+.airline-form-button-cancel {
   display: flex;
   justify-content: center;
   margin-top: 10px;

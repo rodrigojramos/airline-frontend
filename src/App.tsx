@@ -52,9 +52,9 @@ export function App() {
           <Route path="/admin" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
             <Route index element={<AdminArea />} />
             <Route path="flights" element={<AllFlights />} />
-            <Route path="flights/new" element={<FlightForm />} />
+            <Route path="flights/:flightId" element={<FlightForm />} />
             <Route path="planes" element={<Planes />} />
-            <Route path="planes/new" element={<PlaneForm />} />
+            <Route path="planes/:planeId" element={<PlaneForm />} />
             <Route path="passenger-list/:flightId" element={<PassengerList />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />

@@ -20,3 +20,12 @@ export function deleteById(id: number) {
     return requestBackend(config);
 }
 
+export function findById(id: number) {
+    const config : AxiosRequestConfig = {
+        method: "GET",
+        url: `/plane/${id}`,
+    }
+
+    return requestBackend(config);
+}
+

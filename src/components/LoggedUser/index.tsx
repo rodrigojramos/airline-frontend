@@ -17,7 +17,9 @@ export function LoggedUser() {
         ? (
             <div className="airline-header-name">
               <div>
-                <p>{contextTokenPayload.username}</p>
+                <Link to="/client-area">
+                  <p>{contextTokenPayload.username}</p>
+                </Link>
               </div>
               <div>
               <Link to="/login">
