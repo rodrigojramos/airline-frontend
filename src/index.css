@@ -909,35 +909,42 @@ html, body {
 }
 
 .airline-form h1 {
-  margin-bottom: 20px;
-}
-
-.airline-form input {
   margin-bottom: 10px;
-  width: 250px;
-  padding: 10px;
-  outline: none;
-  border: 3px solid #FFF;
 }
 
 .airline-form-input {
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 4px;
   width: 250px;
   padding: 10px;
   outline: none;
   border: 3px solid #FFF;
+}
+
+.airline-form-input[data-invalid="true"][data-dirty="true"] {
+  border: 3px solid #F33;
+}
+
+.airline-form-input[data-invalid="true"][data-dirty="true"] ~ p {
+  display: unset;
+}
+
+.airline-form-error {
+  color: #F33;
+  font-size: 12px;
+  display: none;
 }
 
 .airline-form-btns {
   display: flex;
   justify-content: space-between;
   width: 200px;
+  margin-top: 20px;
 }
 
 .airline-form-button {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
   padding: 5px;
   background-color: #181818;
   color: #87CEEB;
@@ -950,7 +957,6 @@ html, body {
 .airline-form-button-cancel {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
   padding: 5px;
   background-color: #181818;
   color: #87CEEB;

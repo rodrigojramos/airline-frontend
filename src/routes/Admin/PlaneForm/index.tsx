@@ -25,6 +25,11 @@ export function PlaneForm() {
             name: "seats",
             type: "number",
             placeholder: "Quantidade de assentos",
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            validation: function(value: any) {
+                return Number(value) > 0;
+              },
+              message: "Favor informar um valor positivo"
           }
     })
 
@@ -39,7 +44,11 @@ export function PlaneForm() {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function handleInputChange(event: any) {
-        setFormData(forms.update(formData, event.target.name, event.target.value));
+        setFormData(forms.updateAndValidate(formData, event.target.name, event.target.value));
+    }
+
+    function handleTurnDirty(name: string) {
+        setFormData(forms.dirtyAndValidate(formData, name));
     }
 
     return (
@@ -48,14 +57,18 @@ export function PlaneForm() {
                 <h1>Cadastrar novo avião</h1>
                 <FormInput
                     { ...formData.name }
+                    onTurnDirty={handleTurnDirty}
                     className="airline-form-input"
                     onChange={handleInputChange}
                 />
+                <p className="airline-form-error">{formData.seats.message}</p>
                 <FormInput
                     { ...formData.seats }
+                    onTurnDirty={handleTurnDirty}
                     className="airline-form-input"
                     onChange={handleInputChange}
                 />
+                <p className="airline-form-error">{formData.seats.message}</p>
                 <div className="airline-form-btns">
                     <Link to="/admin/planes">
                         <div className="airline-form-button-cancel">

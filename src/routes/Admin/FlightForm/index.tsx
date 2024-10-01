@@ -30,7 +30,7 @@ export function FlightForm() {
             value: "",
             id: "flightDay",
             name: "flightDay",
-            type: "datetime",
+            type: "datetime-local",
             placeholder: "Dia - Horário",
         },
         price: {
@@ -60,7 +60,7 @@ export function FlightForm() {
         if (isEditing) {
             flightService.findById(Number(params.flightId))
                 .then(response => {
-                    console.log(response.data)
+                    setFormData(forms.updateAll(formData, response.data))
                 })
         }
     }, [])
@@ -99,7 +99,11 @@ export function FlightForm() {
                     className="airline-form-input"
                     onChange={handleInputChange}
                 />
-                <input type="datetime-local" placeholder="Data"/>
+                <FormInput
+                    { ...formData.flightDay }
+                    className="airline-form-input"
+                    onChange={handleInputChange}
+                />
                 <div className="airline-form-btns">
                     <Link to="/admin/flights">
                         <div className="airline-form-button-cancel">
