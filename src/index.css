@@ -925,7 +925,7 @@ html, body {
   border: 3px solid #F33;
 }
 
-.airline-form-input[data-invalid="true"][data-dirty="true"] ~ p {
+.airline-form-input[data-invalid="true"][data-dirty="true"] + p {
   display: unset;
 }
 

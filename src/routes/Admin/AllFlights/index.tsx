@@ -22,11 +22,11 @@ export function AllFlights() {
                 <div className="airline-all-flights-title">
                     <h3>TODOS OS VOOS</h3>
                 </div>
-                <div className="airline-all-flights-new-flight">
-                    <Link to="/admin/flights/new">
+                <Link to="/admin/flights/new">
+                    <div className="airline-all-flights-new-flight">
                         <p>Novo</p>
-                    </Link>
-                </div>
+                    </div>
+                </Link>
                 {
                     flights.map((flight => (
 <                       AllFlightsCard key={flight.id} flight={flight}/>

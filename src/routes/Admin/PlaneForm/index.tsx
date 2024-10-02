@@ -18,6 +18,10 @@ export function PlaneForm() {
           name: "name",
           type: "text",
           placeholder: "Nome",
+          validation: function(value: string) {
+            return value.length >= 3 && value.length <=30;
+          },
+          message: "Favor informar um nome de 3 a 30 caracteres"
         },
         seats: {
             value: "",
@@ -61,7 +65,7 @@ export function PlaneForm() {
                     className="airline-form-input"
                     onChange={handleInputChange}
                 />
-                <p className="airline-form-error">{formData.seats.message}</p>
+                <p className="airline-form-error">{formData.name.message}</p>
                 <FormInput
                     { ...formData.seats }
                     onTurnDirty={handleTurnDirty}

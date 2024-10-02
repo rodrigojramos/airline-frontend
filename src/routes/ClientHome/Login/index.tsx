@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useState } from "react";
 import * as authService from "../../../services/auth-service";
 import * as forms from "../../../utils/forms";
@@ -11,7 +12,6 @@ export function Login() {
 
     const { setContextTokenPayload } = useContext(ContextToken);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [formData, setFormData] = useState<any>({
         username: {
           value: "",
@@ -35,7 +35,6 @@ export function Login() {
         },
       })
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function handleSubmit(event: any) {
         event.preventDefault();
         authService.loginRequest(forms.toValues(formData))
@@ -49,7 +48,6 @@ export function Login() {
             })
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function handleInputChange(event: any) {
         setFormData(forms.update(formData, event.target.name, event.target.value));
     }
