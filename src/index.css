@@ -935,6 +935,11 @@ html, body {
   display: none;
 }
 
+.airline-form-select-container {
+  padding: unset;
+  
+}
+
 .airline-form-btns {
   display: flex;
   justify-content: space-between;

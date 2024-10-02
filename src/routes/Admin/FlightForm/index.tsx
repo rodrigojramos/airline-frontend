@@ -7,6 +7,7 @@ import * as flightService from "../../../services/flight-service";
 import * as planeService from "../../../services/plane-service";
 import { PlaneDTO } from "../../../models/plane";
 import { FormSelect } from "../../../components/FormSelect";
+import { selectStyles } from "../../../utils/select";
 
 export function FlightForm() {
 
@@ -144,7 +145,8 @@ export function FlightForm() {
                 <p className="airline-form-error">{formData.availableSeats.message}</p>
                 <FormSelect
                     { ...formData.plane}
-                    className="airline-form-input"
+                    className="airline-form-input airline-form-select-container"
+                    styles={selectStyles}
                     options={plane} 
                     onChange={(obj: any) => {
                         const newFormData= forms.updateAndValidate(formData, "plane", obj);
