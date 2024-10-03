@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FormInput } from "../../../components/FormInput";
@@ -10,7 +11,6 @@ export function PlaneForm() {
 
     const isEditing = params.planeId !== 'new';
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [formData, setFormData] = useState<any>({
         name: {
           value: "",
@@ -29,7 +29,6 @@ export function PlaneForm() {
             name: "seats",
             type: "number",
             placeholder: "Quantidade de assentos",
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             validation: function(value: any) {
                 return Number(value) > 0;
               },
@@ -46,7 +45,6 @@ export function PlaneForm() {
         }
     }, [])
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function handleInputChange(event: any) {
         setFormData(forms.updateAndValidate(formData, event.target.name, event.target.value));
     }
@@ -55,35 +53,50 @@ export function PlaneForm() {
         setFormData(forms.dirtyAndValidate(formData, name));
     }
 
+    function handleSubmit(event: any) {
+        event.preventDefault();
+
+        const formDataValidated = forms.dirtyAndValidateAll(formData);
+
+        if (forms.hasAnyInvalid(formDataValidated)) {
+            setFormData(formDataValidated);
+            return;
+        }
+
+        //console.log(forms.toValues(formData));
+    }
+
     return (
         <section className="airline-form-section">
-            <div className="airline-form">
-                <h1>Cadastrar novo avião</h1>
-                <FormInput
-                    { ...formData.name }
-                    onTurnDirty={handleTurnDirty}
-                    className="airline-form-input"
-                    onChange={handleInputChange}
-                />
-                <p className="airline-form-error">{formData.name.message}</p>
-                <FormInput
-                    { ...formData.seats }
-                    onTurnDirty={handleTurnDirty}
-                    className="airline-form-input"
-                    onChange={handleInputChange}
-                />
-                <p className="airline-form-error">{formData.seats.message}</p>
-                <div className="airline-form-btns">
-                    <Link to="/admin/planes">
-                        <div className="airline-form-button-cancel">
-                            Cancelar
-                        </div>
-                    </Link>
-                    <div className="airline-form-button">
-                        Salvar
+            <form onSubmit={handleSubmit}>
+                <div className="airline-form">
+                    <h1>Cadastrar novo avião</h1>
+                    <FormInput
+                        { ...formData.name }
+                        onTurnDirty={handleTurnDirty}
+                        className="airline-form-input"
+                        onChange={handleInputChange}
+                    />
+                    <p className="airline-form-error">{formData.name.message}</p>
+                    <FormInput
+                        { ...formData.seats }
+                        onTurnDirty={handleTurnDirty}
+                        className="airline-form-input"
+                        onChange={handleInputChange}
+                    />
+                    <p className="airline-form-error">{formData.seats.message}</p>
+                    <div className="airline-form-btns">
+                        <Link to="/admin/planes">
+                            <button className="airline-form-button-cancel">
+                                Cancelar
+                            </button>
+                        </Link>
+                        <button type="submit" className="airline-form-button">
+                            Salvar
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </section>
     )
 }

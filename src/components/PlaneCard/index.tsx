@@ -4,12 +4,15 @@ import { useState } from "react";
 import { DialogConfirmation } from "../DialogConfirmation";
 import * as planeService from '../../services/plane-service';
 import { DialogInfo } from "../DialogInfo";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     plane: PlaneDTO;
 }
 
 export function PlaneCard({ plane }: Props) {
+
+    const navigate = useNavigate();
 
     const [dialogInfoData, setDialogInfoData] = useState({
         visible: false,
@@ -40,12 +43,16 @@ export function PlaneCard({ plane }: Props) {
         setDialogConfirmationData({ ...dialogConfirmationData, visible: false});
     }
 
-    function handleDeleteClick(planeId: number) {
-        setDialogConfirmationData({ ...dialogConfirmationData, id: planeId, visible: true});
-    }
-
     function handleDialogInfoClose() {
         setDialogInfoData({...dialogInfoData, visible: false});
+    }
+
+    function handleUpdateClick(planeId: number) {
+        navigate(`/admin/planes/${planeId}`);
+    }
+
+    function handleDeleteClick(planeId: number) {
+        setDialogConfirmationData({ ...dialogConfirmationData, id: planeId, visible: true});
     }
 
     return (
@@ -61,7 +68,7 @@ export function PlaneCard({ plane }: Props) {
                     </div>
                     <div className="airline-planes-card-icons">
                         <div className="airline-planes-card-icon">
-                            <Pencil />
+                            <Pencil onClick={() => handleUpdateClick(plane.id)} />
                         </div>
                         <div className="airline-planes-card-icon">
                             <Trash2 onClick={() => handleDeleteClick(plane.id)}/>

@@ -714,6 +714,20 @@ html, body {
   size: 40px;
 }
 
+.airline-passenger-list-btn-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100px;
+  height: 40px;
+  background-color: #181818;
+  color: #87CEEB;
+  border: 2px solid #87CEEB;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 /*-----------------Login----------------*/
 
 .airline-login-main {

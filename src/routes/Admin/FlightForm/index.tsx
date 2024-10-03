@@ -111,71 +111,79 @@ export function FlightForm() {
         setFormData(forms.dirtyAndValidate(formData, name));
     }
 
+    function handleSubmit(event: any) {
+        event.preventDefault();
+
+        console.log(forms.toValues(formData));
+    } 
+
     return (
         <section className="airline-form-section">
-            <div className="airline-form">
-                <h1>Cadastrar novo voo</h1>
-                <FormInput
-                    { ...formData.departure }
-                    className="airline-form-input"
-                    onChange={handleInputChange}
-                    onTurnDirty={handleTurnDirty}
-                />
-                <p className="airline-form-error">{formData.departure.message}</p>
-                <FormInput
-                    { ...formData.arrival }
-                    className="airline-form-input"
-                    onChange={handleInputChange}
-                    onTurnDirty={handleTurnDirty}
-                />
-                <p className="airline-form-error">{formData.arrival.message}</p>
-                <FormInput
-                    { ...formData.price }
-                    className="airline-form-input"
-                    onChange={handleInputChange}
-                    onTurnDirty={handleTurnDirty}
-                />
-                <p className="airline-form-error">{formData.price.message}</p>
-                <FormInput
-                    { ...formData.availableSeats }
-                    className="airline-form-input"
-                    onChange={handleInputChange}
-                    onTurnDirty={handleTurnDirty}
-                />
-                <p className="airline-form-error">{formData.availableSeats.message}</p>
-                <FormSelect
-                    { ...formData.plane}
-                    className="airline-form-input airline-form-select-container"
-                    styles={selectStyles}
-                    options={plane} 
-                    onChange={(obj: any) => {
-                        const newFormData= forms.updateAndValidate(formData, "plane", obj);
-                        setFormData(newFormData);
+            <form onSubmit={handleSubmit}>
+                <div className="airline-form">
+                    <h1>Cadastrar novo voo</h1>
+                    <FormInput
+                        { ...formData.departure }
+                        className="airline-form-input"
+                        onChange={handleInputChange}
+                        onTurnDirty={handleTurnDirty}
+                    />
+                    <p className="airline-form-error">{formData.departure.message}</p>
+                    <FormInput
+                        { ...formData.arrival }
+                        className="airline-form-input"
+                        onChange={handleInputChange}
+                        onTurnDirty={handleTurnDirty}
+                    />
+                    <p className="airline-form-error">{formData.arrival.message}</p>
+                    <FormInput
+                        { ...formData.price }
+                        className="airline-form-input"
+                        onChange={handleInputChange}
+                        onTurnDirty={handleTurnDirty}
+                    />
+                    <p className="airline-form-error">{formData.price.message}</p>
+                    <FormInput
+                        { ...formData.availableSeats }
+                        className="airline-form-input"
+                        onChange={handleInputChange}
+                        onTurnDirty={handleTurnDirty}
+                    />
+                    <p className="airline-form-error">{formData.availableSeats.message}</p>
+                    <FormSelect
+                        { ...formData.plane}
+                        className="airline-form-input airline-form-select-container"
+                        styles={selectStyles}
+                        options={plane} 
+                        onChange={(obj: any) => {
+                            const newFormData= forms.updateAndValidate(formData, "plane", obj);
+                            setFormData(newFormData);
 
-                    }}
-                    getOptionLabel={(obj: any) => obj.name}
-                    getOptionValue={(obj: any) => String(obj.id)}
-                    onTurnDirty={handleTurnDirty}
-                />
-                <p className="airline-form-error">{formData.plane.message}</p>
-                <FormInput
-                    { ...formData.flightDay }
-                    className="airline-form-input"
-                    onChange={handleInputChange}
-                    onTurnDirty={handleTurnDirty}
-                />
-                <p className="airline-form-error">{formData.flightDay.message}</p>
-                <div className="airline-form-btns">
-                    <Link to="/admin/flights">
-                        <div className="airline-form-button-cancel">
-                            Cancelar
-                        </div>
-                    </Link>
-                    <div className="airline-form-button">
-                        Salvar
+                        }}
+                        getOptionLabel={(obj: any) => obj.name}
+                        getOptionValue={(obj: any) => String(obj.id)}
+                        onTurnDirty={handleTurnDirty}
+                    />
+                    <p className="airline-form-error">{formData.plane.message}</p>
+                    <FormInput
+                        { ...formData.flightDay }
+                        className="airline-form-input"
+                        onChange={handleInputChange}
+                        onTurnDirty={handleTurnDirty}
+                    />
+                    <p className="airline-form-error">{formData.flightDay.message}</p>
+                    <div className="airline-form-btns">
+                        <Link to="/admin/flights">
+                            <button className="airline-form-button-cancel">
+                                Cancelar
+                            </button>
+                        </Link>
+                        <button type="submit" className="airline-form-button">
+                            Salvar
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </section>
     )
 }

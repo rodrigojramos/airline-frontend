@@ -5,6 +5,7 @@ import { FlightDTO } from "../../../models/flight";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import { UserDTO } from "../../../models/user";
+import { Link } from "react-router-dom";
 
 export function PassengerList() {
 
@@ -63,6 +64,11 @@ export function PassengerList() {
                         </div>
                     </div>
                 </div>
+                <Link to="/admin/flights">
+                    <div className="airline-passenger-list-btn-back">
+                        Voltar
+                    </div>
+                </Link>
             </section>
         </main>
     )

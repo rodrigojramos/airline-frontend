@@ -47,6 +47,10 @@ export function AllFlightsCard({ flight }: Props) {
         setDialogConfirmationData({ ...dialogConfirmationData, id: flightId, visible: true});
     }
 
+    function handleUpdateClick(flightId: number) {
+        navigate(`/admin/flights/${flightId}`);
+    }
+
     function handleDialogInfoClose() {
         setDialogInfoData({...dialogInfoData, visible: false});
     }
@@ -75,7 +79,7 @@ export function AllFlightsCard({ flight }: Props) {
                         <NotebookText onClick={() => handlePassengerListClick(flight.id)}/>
                     </div>
                     <div className="airline-all-flights-card-icon">
-                        <Pencil />
+                        <Pencil onClick={() => handleUpdateClick(flight.id)} />
                     </div>
                     <div className="airline-all-flights-card-icon">
                         <Trash2 onClick={() => handleDeleteClick(flight.id)}/>
