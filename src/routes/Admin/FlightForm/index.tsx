@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as forms from "../../../utils/forms";
 import { useEffect, useState } from "react";
 import { FormInput } from "../../../components/FormInput";
@@ -12,6 +12,8 @@ import { selectStyles } from "../../../utils/select";
 export function FlightForm() {
 
     const params = useParams();
+
+    const navigate = useNavigate();
 
     const isEditing = params.flightId !== 'new';
 
@@ -114,7 +116,27 @@ export function FlightForm() {
     function handleSubmit(event: any) {
         event.preventDefault();
 
-        console.log(forms.toValues(formData));
+        const formDataValidated = forms.dirtyAndValidateAll(formData);
+
+        if (forms.hasAnyInvalid(formDataValidated)) {
+            setFormData(formDataValidated);
+            return;
+        }
+
+        const requestBody = forms.toValues(formData);
+
+        if(isEditing) {
+            requestBody.id = params.flightId;
+        }
+
+        const request = isEditing 
+            ? flightService.updateRequest(requestBody)
+            : flightService.insertRequest(requestBody);
+
+        request
+            .then(() => {
+                navigate("/admin/flights");
+            })
     } 
 
     return (
