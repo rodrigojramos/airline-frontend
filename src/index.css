@@ -203,13 +203,21 @@ html, body {
 
 .airline-flight-min-card-details {
   width: 800px;
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 10px;
   border: 3px solid #181818;
   border-bottom-left-radius: 12px;
   background-color: #111111;
   display: flex;
   justify-content: space-around;
+  align-items: center;
+}
+
+.airline-flight-min-card-time {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*------------payment------------*/
@@ -364,7 +372,7 @@ html, body {
   align-items: center;
 }
 
-.airline-client-checkin-flight {
+.airline-client-checkin-flight-on {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -376,6 +384,40 @@ html, body {
   border-bottom: 3px solid #181818;
   border-bottom-right-radius: 12px;
   cursor: pointer;
+}
+
+.airline-client-checkin-flight-off {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #87CEEB;
+  opacity: 0.4;
+  width: 150px;
+  height: 70px;
+  border-right: 3px solid #181818;
+  border-bottom: 3px solid #181818;
+  border-bottom-right-radius: 12px;
+}
+
+.airline-client-checkin-flight-done {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #87CEEB;
+  opacity: 0.4;
+  width: 150px;
+  height: 70px;
+  border-right: 3px solid #181818;
+  border-bottom: 3px solid #181818;
+  border-bottom-right-radius: 12px;
+}
+
+.airline-client-checkin-done {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .airline-client-checkin-flight h4 {
@@ -416,7 +458,7 @@ html, body {
   padding: 40px;
 }
 
-.airline-plane-seats {
+.airline-seats {
   width: 220px;
   height: 420px;
   background-color: #181818;
@@ -439,14 +481,18 @@ html, body {
   padding: 10px;
 }
 
-.airline-plane-seats-a {
-  background-color: #87CEEB;
+.airline-plane-seats {
+  background-color: #FFF;
   width: 30px;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.airline-plane-seats.selected {
+  background-color: #87CEEB;
 }
 
 .airline-title-checkin-plane {
@@ -459,6 +505,20 @@ html, body {
 
 .airline-title-checkin-plane h1 {
   color: #87CEEB;
+}
+
+.airline-confirmation-seat-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  color: #FFF;
+}
+
+.airline-confirmation-seat-message p {
+  margin-left: 5px;
+  color: #87CEEB;
+  font-size: 20px;
 }
 
 .airline-confirmation-seat-button {
@@ -557,6 +617,7 @@ html, body {
 .airline-all-flights-card {
    display: flex;
    justify-content: space-between;
+   align-items: center;
    margin-top: 20px;
    background-color: #111111;
    padding: 10px;
@@ -583,6 +644,13 @@ html, body {
 
 .airline-flight-card-admin {
   width: 980px;
+}
+
+.airline-all-flights-time {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 /*----------------Planes--------------*/

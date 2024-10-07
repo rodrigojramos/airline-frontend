@@ -1,86 +1,64 @@
-import { Pencil, Ticket } from "lucide-react";
 import { MinFlightCard } from "../../../components/MinFlightCard";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { UserDTO } from "../../../models/user";
+import * as userService from "../../../services/user-service";
+import { TicketDTO } from "../../../models/ticket";
+import * as ticketService from "../../../services/ticket-service";
 
 export function ClientArea() {
-    return (
-        <main className="airline-main-client">
-            <section className="airline-section-client-data">
-                <h3>SEUS DADOS</h3>
-                <div className="airline-client-data-card">
-                    <div className="airline-client-data">
-                        <p>Nome:</p>
-                        <input 
-                            type="text" 
-                            value="Rodrigo" 
-                            id="disabledInput" 
-                            disabled
-                        />
-                    </div>
-                    <div className="airline-client-data">
-                        <p>Email:</p>
-                        <input 
-                            type="text" 
-                            value="rodrigo@gmail.com" 
-                            id="disabledInput" 
-                            disabled
-                        />
-                    </div>
-                    <div className="airline-client-data">
-                        <p>CPF:</p>
-                        <input 
-                            type="text" 
-                            value="11122233399" 
-                            id="disabledInput" 
-                            disabled
-                        />
-                    </div>
-                </div>
-                <Link to="/client-area/personal-data">
-                    <div className="airline-client-edit-data">
-                        <p>Editar algum campo</p>
-                        <Pencil className="airline-client-edit-data-icon"/>
-                    </div>
-                </Link>
-            </section>
-            <section className="airline-client-next-flights">
-                <h3>SEUS PRÓXIMOS VOOS</h3>
-                <div className="airline-client-next-flights-card">
-                    <div className="airline-client-ticket">
-                        <Ticket />
-                        <h4>TICKET AIRLINE</h4>
-                        <Ticket />
-                    </div>
-                    <div className="airline-client-checkin-div">
-                        <MinFlightCard />
-                        <Link to="/check-in">
-                            <div className="airline-client-checkin-flight">
-                                <h4>Check-in</h4>
-                                <p>ON</p>
-                            </div>
-                        </Link>
-                    </div>
-                </div>
+  const [user, setUser] = useState<UserDTO>();
 
-                <div className="airline-client-next-flights-card">
-                    <div className="airline-client-ticket">
-                        <Ticket />
-                        <h4>TICKET AIRLINE</h4>
-                        <Ticket />
-                    </div>
-                    <div className="airline-client-checkin-div">
-                        <MinFlightCard />
-                        <Link to="/check-in">
-                            <div className="airline-client-checkin-flight">
-                                <h4>Check-in</h4>
-                                <p>ON</p>
-                            </div>
-                        </Link>
-                    </div>
-                </div>
+  const [tickets, setTickets] = useState<TicketDTO[]>([]);
 
-            </section>
-        </main>
-        
-    )
+  useEffect(() => {
+    userService
+      .findMe()
+      .then((response) => {
+        const userData = response.data;
+        setUser(userData);
+
+        return ticketService.getTicketsByUserId(userData.id);
+      })
+      .then((ticketResponse) => {
+        setTickets(ticketResponse.data);
+      });
+  }, []);
+
+  return (
+    <main className="airline-main-client">
+      <section className="airline-section-client-data">
+        <h3>SEUS DADOS</h3>
+        <div className="airline-client-data-card">
+          <div className="airline-client-data">
+            <p>Nome:</p>
+            <input type="text" value={user?.name} id="disabledInput" disabled />
+          </div>
+          <div className="airline-client-data">
+            <p>Email:</p>
+            <input
+              type="text"
+              value={user?.email}
+              id="disabledInput"
+              disabled
+            />
+          </div>
+          <div className="airline-client-data">
+            <p>CPF:</p>
+            <input
+              type="text"
+              value={user?.document}
+              id="disabledInput"
+              disabled
+            />
+          </div>
+        </div>
+      </section>
+      <section className="airline-client-next-flights">
+        <h3>SEUS PRÓXIMOS VOOS</h3>
+        {tickets.map((ticket) => (
+          <MinFlightCard key={ticket.id} ticket={ticket} />
+        ))}
+      </section>
+    </main>
+  );
 }

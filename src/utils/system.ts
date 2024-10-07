@@ -4,4 +4,4 @@ export const CLIENT_ID = "myclientid";
 
 export const CLIENT_SECRET = "myclientsecret";
 
-export const TOKEN_KEY = "com.rodrigoramos.airline/token";
+export const TOKEN_KEY = "com.rodrigoramos.airline/Token";

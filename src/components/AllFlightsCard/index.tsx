@@ -56,6 +56,12 @@ export function AllFlightsCard({ flight }: Props) {
     }
 
     const date = new Date(flight.flightDay);
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const time = `${hours}:${minutes}`;
@@ -72,7 +78,10 @@ export function AllFlightsCard({ flight }: Props) {
                     <MoveRight />
                     <p className="padding-left-10">{flight.arrival}</p>
                 </div>
-                <p>Horário: {time}</p>
+                <div className="airline-all-flights-time">
+                    <p>{formattedDate}</p>
+                    <p>Horário: {time}</p>
+                </div>
                 <p>Lugares livres: {flight.availableSeats}</p>
                 <div className="airline-all-flights-card-icons">
                     <div className="airline-all-flights-card-icon">

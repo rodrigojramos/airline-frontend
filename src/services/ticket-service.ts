@@ -1,0 +1,36 @@
+import { AxiosRequestConfig } from "axios";
+import { requestBackend } from "../utils/requests";
+import { TicketDTO } from "../models/ticket";
+
+export function findById(id: number) {
+    const config : AxiosRequestConfig = {
+        method: "GET",
+        url: `/client-area/${id}`,
+        withCredentials: true,
+    }
+
+    return requestBackend(config);
+}
+
+export function getTicketsByUserId(id: number) {
+    const config : AxiosRequestConfig = {
+        method: "GET",
+        url: "/client-area",
+        params: {
+            userId: id,
+        },
+    }
+
+    return requestBackend(config);
+}
+
+export function updateRequest(obj: TicketDTO) {
+    const config : AxiosRequestConfig = {
+        method: "PUT",
+        url: `/client-area/${obj.id}`,
+        data: obj,
+        withCredentials: true,
+    }
+
+    return requestBackend(config);
+}

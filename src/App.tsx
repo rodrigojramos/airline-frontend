@@ -21,7 +21,6 @@ import { ContextToken } from './utils/contex-token'
 import * as authService from "./services/auth-service"
 import { PlaneForm } from './routes/Admin/PlaneForm'
 import { FlightForm } from './routes/Admin/FlightForm'
-import { ClientForm } from './routes/ClientHome/ClientForm'
 
 
 export function App() {
@@ -45,8 +44,7 @@ export function App() {
             <Route path="payment" element={<Payment />} />
             <Route path="buy-confirmation" element={<BuyConfirmation />} />
             <Route path="client-area" element={<ClientArea />} />
-            <Route path="client-area/personal-data" element={<ClientForm />} />
-            <Route path="check-in" element={<CheckIn />} />
+            <Route path="client-area/:ticketId" element={<CheckIn />} />
             <Route path="login" element={<Login />} />
           </Route>
           <Route path="/admin" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>

@@ -16,6 +16,7 @@ export function deleteById(id: number) {
     const config : AxiosRequestConfig = {
         method: "DELETE",
         url: `/plane/${id}`,
+        withCredentials: true
     }
 
     return requestBackend(config);
