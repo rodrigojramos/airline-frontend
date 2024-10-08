@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { FlightCard } from "../../../components/FlightCard";
 
 export function Payment() {
     return(
@@ -8,8 +7,8 @@ export function Payment() {
                 <div className="airline-payment-text">
                     <p>Confirme abaixo suas passagens selecionadas!</p>
                 </div>
-                <FlightCard />
-                <FlightCard />
+                <p>Aqui é o card do FlightCardOneWay</p>
+                <p>Aqui é o card do FlightCardRoundTri</p>
                 <div className="airline-payment-value-total">
                     <p>Total: R$1.400,00</p>
                 </div>

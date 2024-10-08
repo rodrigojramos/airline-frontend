@@ -34,6 +34,18 @@ export function findAllTodayFlights() {
     return axios(config);
 }
 
+export function findFlightsByDateAndDestination(departure: string, arrival: string, d: number, m: number, y: number) {
+
+    const config : AxiosRequestConfig = {
+        method: "GET",
+        baseURL: BASE_URL,
+        url: `/flight/${departure}/${arrival}/${d}-${m}-${y}`,
+        withCredentials: true
+    }
+
+    return axios(config);
+}
+
 export function findPassengerList(id: number) {
 
     const config : AxiosRequestConfig = {

@@ -113,8 +113,8 @@ html, body {
 .airline-card-reservation {
   background-color: #000;
   padding: 15px 20px;
-  width: 800px;
-  height: 200px;
+  width: 650px;
+  height: 300px;
   color: #FFF;
   border: 3px solid #181818;
   border-radius: 20px;
@@ -132,6 +132,13 @@ html, body {
 
 .airline-destination-select {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.airline-destination-select input {
+  padding: 0px 5px;
+  outline: none;
 }
 
 .airline-destination-select p {
@@ -141,11 +148,41 @@ html, body {
 .airline-destination-select-space {
   padding: 0px 10px;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .airline-icon-destination {
   padding-right: 5px;
   color: #87CEEB;
+}
+
+.airline-icon-destination-calendar1 {
+  padding-right: 5px;
+  color: #87CEEB;
+  margin-left: 54px;
+}
+
+.airline-icon-destination-calendar2 {
+  padding-right: 5px;
+  color: #87CEEB;
+  margin-left: 126px;
+}
+
+.airline-select {
+  width: 180px;
+}
+
+.airline-select-destination-trip {
+  display: flex;
+  width: 600px;
+  margin-top: 20px;
+}
+
+.airline-select-data-trip {
+  display: flex;
+  margin-top: 20px;
+  width: 600px;
 }
 
 /*-------------Flights---------------*/
@@ -195,6 +232,11 @@ html, body {
   background-color: #111111;
   display: flex;
   justify-content: space-around;
+  cursor: pointer;
+}
+
+.airline-flight-card-details.selected {
+  border: 2px solid #87CEEB;
 }
 
 .airline-flight-card-destination {
