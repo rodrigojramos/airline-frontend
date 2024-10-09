@@ -1,9 +1,10 @@
 import { ArrowBigRight } from "lucide-react";
 import { FlightCard } from "../../../components/FlightCard";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FlightDTO } from "../../../models/flight";
 import * as flightService from "../../../services/flight-service";
+import { Link } from "react-router-dom";
 
 type LocationState = {
     origin: string;
@@ -15,17 +16,17 @@ type LocationState = {
 
 export function Flights() {
 
+    const navigate = useNavigate();
+
     const location = useLocation();
     
     const { origin, destination, goingDate, backDate, tripType } = location.state as LocationState;
 
-    const [year1, month1, day1] = goingDate.split('-');
+    const [year1, month1, day1] = goingDate ? goingDate.split('-') : [null, null, null];
+    const goingDateFormated = (day1 && month1 && year1) ? `${day1}/${month1}/${year1}` : "Data inválida";
 
-    const goingDateFormated = `${day1}/${month1}/${year1}`;
-
-    const [year2, month2, day2] = backDate.split('-');
-
-    const backDateFormated = `${day2}/${month2}/${year2}`;
+    const [year2, month2, day2] = backDate ? backDate.split('-') : [null, null, null];
+    const backDateFormated = (day2 && month2 && year2) ? `${day2}/${month2}/${year2}` : "Data inválida";
 
     const [flights, setFlights] = useState<FlightDTO[]>([]);
 
@@ -35,13 +36,19 @@ export function Flights() {
     
     const [selectedBackFlight, setSelectedBackFlight] = useState<FlightDTO | null>(null);
 
+    const [noGoingFlightsAvailable, setNoGoingFlightsAvailable] = useState(false);
+
+    const [noBackFlightsAvailable, setNoBackFlightsAvailable] = useState(false);
+
+
     function handleClickConfirmation() {
-        if (tripType === 'one-way') {
-            console.log("Voo de ida selecionado:", selectedGoingFlight);
-        } else {
-            console.log("Voo de ida selecionado:", selectedGoingFlight);
-            console.log("Voo de volta selecionado:", selectedBackFlight);
-        }
+        navigate("/payment", {
+            state: {
+                selectedGoingFlight,
+                selectedBackFlight,
+                tripType
+            }
+        })
     }
 
     useEffect(() => {
@@ -49,16 +56,22 @@ export function Flights() {
         flightService.findFlightsByDateAndDestination(origin, destination, Number(day1), Number(month1), Number(year1))
             .then(response => {
                 setFlights(response.data);
+                if(response.data.length === 0) {
+                    setNoGoingFlightsAvailable(true);
+                }
             })
-    }, [])
+    }, [day1, destination, month1, origin, year1, noGoingFlightsAvailable])
 
     useEffect(() => {
 
         flightService.findFlightsByDateAndDestination(destination, origin, Number(day2), Number(month2), Number(year2))
             .then(response => {
                 setBackFlights(response.data);
+                if(response.data.length === 0) {
+                    setNoBackFlightsAvailable(true);
+                }
             })
-    }, [])
+    }, [day2, destination, month2, origin, year2])
 
     return (
         <main className="airline-main-flights">
@@ -85,6 +98,13 @@ export function Flights() {
                                         onSelect={setSelectedGoingFlight}
                                     />
                                 )))}
+                                {
+                                    noGoingFlightsAvailable && (
+                                        <div className="airline-message-no-flights">
+                                            <p>Não foi encontrado nenhuma passagem nesta data {goingDateFormated}.</p>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </>
                     ) : (
@@ -108,6 +128,13 @@ export function Flights() {
                                         onSelect={setSelectedGoingFlight}
                                     />
                                 )))}
+                                {
+                                    noGoingFlightsAvailable && (
+                                        <div className="airline-message-no-flights">
+                                            <p>Não foi encontrado nenhuma passagem nesta data {goingDateFormated}.</p>
+                                        </div>
+                                    )
+                                }
                             </div>
 
                             <div className="airline-flights-details">
@@ -129,15 +156,47 @@ export function Flights() {
                                         onSelect={setSelectedBackFlight}
                                     />
                                 )))}
+                                {
+                                    noBackFlightsAvailable && (
+                                        <div className="airline-message-no-flights">
+                                            <p>Não foi encontrado nenhuma passagem nesta data {backDateFormated}.</p>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </>
                     )
                 }
-                <Link to="/payment">
-                    <div onClick={handleClickConfirmation} className="airline-button">
-                        <p>Confirmar passagem</p>
-                    </div>
-                </Link>
+                <div className="airline-buttons">
+                    <Link to="/">
+                        <div className="airline-button">
+                            <p>Voltar</p>
+                        </div>
+                    </Link>
+                    {
+                        tripType === "one-way" ? (
+                            selectedGoingFlight ? (
+                                <div onClick={handleClickConfirmation} className="airline-button">
+                                    <p>Confirmar passagem</p>
+                                </div>
+                            ) : (
+                                <div className="airline-button-off">
+                                    <p>Confirmar passagem</p>
+                                </div>
+                            )
+                        ) : tripType === "round-trip" ? (
+                            selectedGoingFlight && selectedBackFlight ? (
+                                <div onClick={handleClickConfirmation} className="airline-button">
+                                    <p>Confirmar passagem</p>
+                                </div>
+                            ) : (
+                                <div className="airline-button-off">
+                                    <p>Confirmar passagem</p>
+                                </div>
+                            )
+                        ) : null
+                    }
+                </div>
             </section>
         </main>
     )

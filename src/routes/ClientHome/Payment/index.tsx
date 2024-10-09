@@ -1,31 +1,167 @@
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FlightDTO } from "../../../models/flight";
+import { MoveRight } from "lucide-react";
+import { UserDTO } from "../../../models/user";
+import { useEffect, useState } from "react";
+import * as userService from "../../../services/user-service";
+import * as ticketService from "../../../services/ticket-service";
+import { TicketDTO } from "../../../models/ticket";
+
+type LocationState = {
+    selectedGoingFlight: FlightDTO;
+    selectedBackFlight: FlightDTO;
+    tripType: 'one-way' | 'round-trip';
+};
 
 export function Payment() {
+
+    const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const { selectedGoingFlight, selectedBackFlight, tripType } = location.state as LocationState;
+
+    const goingDate = selectedGoingFlight ? new Date(selectedGoingFlight.flightDay) : null;
+    const backDate = selectedBackFlight ? new Date(selectedBackFlight.flightDay) : null;
+
+    const goingHours = goingDate ? String(goingDate.getHours()).padStart(2, '0') : "00";
+    const goingMinutes = goingDate ? String(goingDate.getMinutes()).padStart(2, '0') : "00";
+    const goingTime = `${goingHours}:${goingMinutes}`;
+
+    const goingDay = goingDate ? String(goingDate.getDate()).padStart(2, '0') : "00";
+    const goingMonth = goingDate ? String(goingDate.getMonth() + 1).padStart(2, '0') : "00";
+    const goingYear = goingDate ? goingDate.getFullYear() : "0000";
+    const goingFormattedDate = `${goingDay}/${goingMonth}/${goingYear}`;
+
+    const backHours = backDate ? String(backDate.getHours()).padStart(2, '0') : "00";
+    const backMinutes = backDate ? String(backDate.getMinutes()).padStart(2, '0') : "00";
+    const backTime = `${backHours}:${backMinutes}`;
+
+    const backDay = backDate ? String(backDate.getDate()).padStart(2, '0') : "00";
+    const backMonth = backDate ? String(backDate.getMonth() + 1).padStart(2, '0') : "00";
+    const backYear = backDate ? backDate.getFullYear() : "0000";
+    const backFormattedDate = `${backDay}/${backMonth}/${backYear}`;
+
+    const priceTotal = selectedBackFlight 
+    ? selectedGoingFlight.price + selectedBackFlight.price 
+    : selectedGoingFlight.price;
+
+    const formattedPriceTotal = priceTotal.toFixed(2);
+
+    const [user, setUser] = useState<UserDTO>();
+
+    useEffect(() => {
+        userService.findMe()
+        .then(response => {
+            setUser(response.data);
+        })
+    }, [])
+
+    function handleConfirmationPayment() {
+        if (user) {
+            const goingTicket: TicketDTO = {
+                id: 0,
+                seat: "",
+                passenger: user,
+                flights: [selectedGoingFlight],
+            };
+    
+            ticketService.insertRequest(goingTicket)
+                .then(() => {
+                    console.log("Ticket de ida inserido com sucesso");
+                    console.log(goingTicket);
+    
+                    if (selectedBackFlight) {
+                        const backTicket: TicketDTO = {
+                            id: 0,
+                            seat: "",
+                            passenger: user,
+                            flights: [selectedBackFlight],
+                        };
+    
+                        return ticketService.insertRequest(backTicket)
+                            .then(() => {
+                                console.log("Ticket de volta inserido com sucesso");
+                                console.log(backTicket);
+                            });
+                    }
+                })
+                .then(() => {
+                    navigate("/buy-confirmation");
+                });
+        }
+    }
+
     return(
         <main>
             <section className="airline-payment-section">
                 <div className="airline-payment-text">
                     <p>Confirme abaixo suas passagens selecionadas!</p>
                 </div>
-                <p>Aqui é o card do FlightCardOneWay</p>
-                <p>Aqui é o card do FlightCardRoundTri</p>
+                {
+                    tripType == "round-trip" ? (
+                        <>
+                        <div className="airline-flight-selected-card-details">
+                            <div className="airline-flight-card-destination">
+                                <p className="padding-right-10">{selectedGoingFlight.departure}</p>
+                                <MoveRight />
+                                <p className="padding-left-10">{selectedGoingFlight.arrival}</p>
+                            </div>
+                            <div className="airline-flight-selected-date-and-time">
+                                <p>{goingFormattedDate}</p>
+                                <p>Horário: {goingTime}</p>
+                            </div>
+                            <p>R${selectedGoingFlight.price}</p>
+                        </div>
+                        <div className="airline-flight-selected-card-details">
+                            <div className="airline-flight-card-destination">
+                                <p className="padding-right-10">{selectedBackFlight.departure}</p>
+                                <MoveRight />
+                                <p className="padding-left-10">{selectedBackFlight.arrival}</p>
+                            </div>
+                            <div className="airline-flight-selected-date-and-time">
+                                <p>{backFormattedDate}</p>
+                                <p>Horário: {backTime}</p>
+                            </div>
+                            <p>R${selectedBackFlight.price}</p>
+                        </div>
+                        </>
+                    ) : (
+                        <>
+                        <div className="airline-flight-selected-card-details">
+                            <div className="airline-flight-card-destination">
+                                <p className="padding-right-10">{selectedGoingFlight.departure}</p>
+                                <MoveRight />
+                                <p className="padding-left-10">{selectedGoingFlight.arrival}</p>
+                            </div>
+                            <div className="airline-flight-selected-date-and-time">
+                                <p>{goingFormattedDate}</p>
+                                <p>Horário: {goingTime}</p>
+                            </div>
+                            <p>R${selectedGoingFlight.price}</p>
+                        </div>
+                        </>
+                    )
+                }
                 <div className="airline-payment-value-total">
-                    <p>Total: R$1.400,00</p>
+                    <p>Total: R${formattedPriceTotal}</p>
                 </div>
                 <div className="airline-payment-text">
-                    <p>Confirme abaixo se seus dados estão corretos!</p>
+                    <p>Dados do passageiro:</p>
                 </div>
                 <div className="airline-payment-personal-data">
-                    <p>Nome:</p>
-                    <input type="text" />
-                    <p className="padding-top-10">CPF:</p>
-                    <input type="text" />
-                </div>
-                <Link to="/buy-confirmation">
-                    <div className="airline-button">
-                        <p>Confirmar pagamento</p>
+                    <div className="airline-payment-data-name">
+                        <p>Nome:</p>
+                        <p className="airline-user">{user?.name}</p>
                     </div>
-                </Link>
+                    <div className="airline-payment-data-document">
+                        <p>CPF:</p>
+                        <p className="airline-user">{user?.document}</p>
+                    </div>
+                </div>
+                <div onClick={handleConfirmationPayment} className="airline-button">
+                    <p>Confirmar pagamento</p>
+                </div>
             </section>
         </main>
     )

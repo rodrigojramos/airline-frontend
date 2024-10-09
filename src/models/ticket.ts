@@ -6,5 +6,4 @@ export type TicketDTO = {
     seat: string;
     passenger: UserDTO;
     flights: FlightDTO[];
-    price: number;
 }

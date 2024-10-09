@@ -113,7 +113,7 @@ html, body {
 .airline-card-reservation {
   background-color: #000;
   padding: 15px 20px;
-  width: 650px;
+  width: 600px;
   height: 300px;
   color: #FFF;
   border: 3px solid #181818;
@@ -175,14 +175,14 @@ html, body {
 
 .airline-select-destination-trip {
   display: flex;
-  width: 600px;
+  width: 550px;
   margin-top: 20px;
 }
 
 .airline-select-data-trip {
   display: flex;
   margin-top: 20px;
-  width: 600px;
+  width: 550px;
 }
 
 /*-------------Flights---------------*/
@@ -235,6 +235,25 @@ html, body {
   cursor: pointer;
 }
 
+.airline-flight-selected-card-details {
+  width: 800px;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: 3px solid #181818;
+  border-radius: 12px;
+  background-color: #111111;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.airline-flight-selected-date-and-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .airline-flight-card-details.selected {
   border: 2px solid #87CEEB;
 }
@@ -262,6 +281,34 @@ html, body {
   align-items: center;
 }
 
+.airline-message-no-flights {
+  color: #FFF;
+}
+
+.airline-button-off {
+  width: 200px;
+  height: 42px;
+  margin: 20px 0px;
+  border: 2px solid #87CEEB;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #87CEEB;
+  background-color: #181818;
+  cursor: default;
+  opacity: 0.4;
+}
+
+.airline-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 440px;
+}
+
 /*------------payment------------*/
 
 .airline-payment-section {
@@ -272,8 +319,8 @@ html, body {
 }
 
 .airline-payment-personal-data {
-  width: 300px;
-  height: 150px;
+  width: 200px;
+  height: 100px;
   background-color: red;
   display: flex;
   flex-direction: column;
@@ -282,6 +329,26 @@ html, body {
   border: 3px solid #181818;
   border-radius: 8px;
   background-color: #111111;
+}
+
+.airline-payment-data-name {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 150px;
+}
+
+.airline-payment-data-document {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-top: 10px;
+  width: 150px;
+}
+
+.airline-user {
+  margin-left: 10px;
+  color: #87CEEB; 
 }
 
 .airline-payment-text {

@@ -34,3 +34,14 @@ export function updateRequest(obj: TicketDTO) {
 
     return requestBackend(config);
 }
+
+export function insertRequest(obj: TicketDTO) {
+    const config : AxiosRequestConfig = {
+        method: "POST",
+        url: "/client-area",
+        withCredentials: true,
+        data: obj
+    }
+
+    return requestBackend(config);
+}

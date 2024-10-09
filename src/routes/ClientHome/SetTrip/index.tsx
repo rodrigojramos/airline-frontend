@@ -30,6 +30,9 @@ export function SetTrip() {
         { value: 'Porto Alegre', label: 'Porto Alegre' },
         { value: 'Recife', label: 'Recife' },
       ]
+
+    const filteredOptionsOrigin = options.filter(option => option.value !== destination?.value);
+    const filteredOptionsDestination = options.filter(option => option.value !== origin?.value);
     
     function handleChangeSelectOrigin(selectedOption: OptionType | null) {
         setOrigin(selectedOption);
@@ -105,7 +108,7 @@ export function SetTrip() {
                         <PlaneTakeoff className="airline-icon-destination"/>
                         <Select 
                             className="airline-select" 
-                            options={options}
+                            options={filteredOptionsOrigin}
                             styles={selectStyles}
                             placeholder=""
                             onChange={handleChangeSelectOrigin}
@@ -115,7 +118,7 @@ export function SetTrip() {
                             <PlaneLanding className="airline-icon-destination"/>
                             <Select 
                                 className="airline-select" 
-                                options={options}
+                                options={filteredOptionsDestination}
                                 styles={selectStyles}
                                 placeholder=""
                                 onChange={handleChangeSelectDestination}
