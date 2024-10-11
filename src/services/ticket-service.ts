@@ -12,6 +12,15 @@ export function findById(id: number) {
     return requestBackend(config);
 }
 
+export function findOccupiedSeatsByFlightId(flightId: number) {
+    const config : AxiosRequestConfig = {
+        method: "GET",
+        url: `/client-area/occupied-seats/${flightId}`,
+    }
+
+    return requestBackend(config);
+}
+
 export function getTicketsByUserId(id: number) {
     const config : AxiosRequestConfig = {
         method: "GET",

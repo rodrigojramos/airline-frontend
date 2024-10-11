@@ -13,7 +13,11 @@ export function MinFlightCard({ ticket }: Props) {
 
   const [isCheckInAvailable, setIsCheckInAvailable] = useState(false);
 
-  const [ChosenSeat, setChosenSeat] = useState(false);
+  const [oldPassage, setOldPassage] = useState(false);
+
+  const [chosenSeat, setChosenSeat] = useState(false);
+  
+  const plane = ticket.flights[0]?.plane;
 
   useEffect(() => {
     const currentDateTime = new Date();
@@ -24,7 +28,9 @@ export function MinFlightCard({ ticket }: Props) {
 
     const hoursDifference = timeDifference / (1000 * 60 * 60);
 
-    setIsCheckInAvailable(hoursDifference <= 72);
+    setOldPassage(hoursDifference <= 0);
+    console.log(oldPassage);
+    setIsCheckInAvailable(hoursDifference <= 72 && hoursDifference > 0);
   },[ticket.flights])
 
   useEffect(() => {
@@ -34,7 +40,11 @@ export function MinFlightCard({ ticket }: Props) {
   },[ticket.seat])
 
   function handleClickCheckIn() {
-    navigate(`/client-area/${ticket.id}`)
+    navigate(`/client-area/${ticket.id}`, {
+      state: {
+        plane,
+      }
+    })
   }
 
   return (
@@ -58,7 +68,7 @@ export function MinFlightCard({ ticket }: Props) {
       </div>
       <div className="airline-client-checkin-div">
         {ticket.flights.map((flight) => (
-          <div className="airline-flight-min-card-details">
+          <div key={flight.id} className="airline-flight-min-card-details">
             <div className="airline-flight-card-destination">
               <p className="padding-right-10">{flight.departure}</p>
               <MoveRight />
@@ -68,12 +78,12 @@ export function MinFlightCard({ ticket }: Props) {
               <p>{new Date(flight.flightDay).toLocaleDateString()}</p>
               <p>Horário: {new Date(flight.flightDay).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</p>
             </div>
-            <p>Poltrona: {ticket.seat || '--'}</p>
+            <p className="airline-flight-min-card-seat">Poltrona: {ticket.seat || '--'}</p>
           </div>
         ))}
         {
           isCheckInAvailable ? (
-              ChosenSeat && ticket.seat ? (
+              chosenSeat && ticket.seat ? (
                 <div className="airline-client-checkin-flight-done">
                   <h4>Check-in</h4>
                   <div className="airline-client-checkin-done">
@@ -88,10 +98,17 @@ export function MinFlightCard({ ticket }: Props) {
                 </div>
               )
           ) : (
-            <div className="airline-client-checkin-flight-off">
-              <h4>Check-in</h4>
-              <p>OFF</p>
-            </div>
+            oldPassage ? (
+              <div className="airline-client-checkin-flight-off">
+                <h4>Passagem</h4>
+                <p>Antiga</p>
+              </div>
+            ) : (
+              <div className="airline-client-checkin-flight-off">
+                <h4>Check-in</h4>
+                <p>OFF</p>
+              </div>
+            )
           )
         }
       </div>

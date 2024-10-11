@@ -6,6 +6,7 @@ import { TicketDTO } from "../../../models/ticket";
 import * as ticketService from "../../../services/ticket-service";
 
 export function ClientArea() {
+  
   const [user, setUser] = useState<UserDTO>();
 
   const [tickets, setTickets] = useState<TicketDTO[]>([]);
@@ -31,13 +32,18 @@ export function ClientArea() {
         <div className="airline-client-data-card">
           <div className="airline-client-data">
             <p>Nome:</p>
-            <input type="text" value={user?.name} id="disabledInput" disabled />
+            <input 
+              type="text" 
+              value={user?.name || ""} 
+              id="disabledInput" 
+              disabled 
+            />
           </div>
           <div className="airline-client-data">
             <p>Email:</p>
             <input
               type="text"
-              value={user?.email}
+              value={user?.email || ""}
               id="disabledInput"
               disabled
             />
@@ -46,7 +52,7 @@ export function ClientArea() {
             <p>CPF:</p>
             <input
               type="text"
-              value={user?.document}
+              value={user?.document || ""}
               id="disabledInput"
               disabled
             />

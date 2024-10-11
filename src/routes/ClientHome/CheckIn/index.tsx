@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import * as ticketService from "../../../services/ticket-service";
 import { TicketDTO } from "../../../models/ticket";
+import { PlaneDTO } from "../../../models/plane";
+import { Link } from "react-router-dom";
+
+type LocationState = {
+  plane: PlaneDTO;
+};
 
 export function CheckIn() {
-  
+
   const params = useParams();
 
   const navigate = useNavigate();
@@ -15,354 +21,170 @@ export function CheckIn() {
 
   const [ticket, setTicket] = useState<TicketDTO | null>(null);
 
+  const [occupiedSeats, setOccupiedSeats] = useState<string[]>([]);
+
+  const location = useLocation();
+
+  const { plane } = location.state as LocationState;
+
   useEffect(() => {
     if (isEditing) {
-        ticketService.findById(Number(params.ticketId))
-            .then(response => {
-                setTicket(response.data);
-                console.log(ticket);
-            })
+      ticketService.findById(Number(params.ticketId)).then((response) => {
+        setTicket(response.data);
+      });
     }
-}, [isEditing, params.ticketId]);
+  }, [isEditing, params.ticketId]);
+
+  useEffect(() => {
+    if (ticket?.flights?.[0]?.id) {
+      ticketService.findOccupiedSeatsByFlightId(Number(ticket.flights[0].id))
+        .then((response) => {
+          const filteredSeats = response.data.filter((seat: string) => seat !== "");
+          setOccupiedSeats(filteredSeats);
+        });
+    }
+  }, [ticket?.flights]);
 
   function handleSeatClick(seat: string) {
-    console.log(seat);
-    setSelectedSeat(seat);
+    if (!occupiedSeats.includes(seat)) {
+      setSelectedSeat(seat);
+    }
   }
 
   function handleConfirmSeat() {
-    if(ticket && selectedSeat) {
-        const updateTicket = { ...ticket, seat: selectedSeat };
-        ticketService.updateRequest(updateTicket)
-            .then(response => {
-                console.log(response.data);
-                navigate("/client-area");
-            })
+    if (ticket && selectedSeat) {
+      const updateTicket = { ...ticket, seat: selectedSeat };
+      ticketService.updateRequest(updateTicket)
+        .then(() => {
+          navigate("/client-area");
+      });
     }
   }
+
+  const seatRowsAtr = [
+    [["1A", "1B"], ["1C", "1D"]],
+    [["2A", "2B"], ["2C", "2D"]],
+    [["3A", "3B"], ["3C", "3D"]],
+    [["4A", "4B"], ["4C", "4D"]],
+  ];
+
+  const seatRowsEmbraer = [
+    [["1A", "1B"], ["1C", "1D"]],
+    [["2A", "2B"], ["2C", "2D"]],
+    [["3A", "3B"], ["3C", "3D"]],
+    [["4A", "4B"], ["4C", "4D"]],
+    [["5A", "5B"], ["5C", "5D"]],
+    [["6A", "6B"], ["6C", "6D"]],
+  ];
+
+  const seatRowsAirbus = [
+    [["1A", "1B"], ["1C", "1D"]],
+    [["2A", "2B"], ["2C", "2D"]],
+    [["3A", "3B"], ["3C", "3D"]],
+    [["4A", "4B"], ["4C", "4D"]],
+    [["5A", "5B"], ["5C", "5D"]],
+    [["6A", "6B"], ["6C", "6D"]],
+    [["7A", "7B"], ["7C", "7D"]],
+    [["8A", "8B"], ["8C", "8D"]],
+  ];
 
   return (
     <main>
       <section className="airline-section-checkin-plane">
         <div className="airline-title-checkin-plane">
           <h1>CHECK-IN</h1>
-          <h4>Rodrigo, escolha seu lugar:</h4>
+          <h4>Escolha seu lugar:</h4>
         </div>
         <div className="airline-seats">
-          <div className="airline-plane-seats-row">
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "1A" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("1A")}
-              >
-                1A
+          {plane.name === "ATR" &&
+            seatRowsAtr.map((row, rowIndex) => (
+              <div key={rowIndex} className="airline-plane-seats-row">
+                {row.map((display, displayIndex) => (
+                  <div
+                    key={displayIndex}
+                    className="airline-plane-seats-row-display"
+                  >
+                    {display.map((seat) => (
+                      <div
+                        key={seat}
+                        className={`airline-plane-seats ${
+                          selectedSeat === seat ? "selected" : ""
+                        } ${occupiedSeats.includes(seat) ? "occupied" : ""}`}
+                        onClick={() => handleSeatClick(seat)}
+                      >
+                        {seat}
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "1B" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("1B")}
-              >
-                1B
+            ))}
+            {plane.name === "Embraer" &&
+            seatRowsEmbraer.map((row, rowIndex) => (
+              <div key={rowIndex} className="airline-plane-seats-row">
+                {row.map((display, displayIndex) => (
+                  <div
+                    key={displayIndex}
+                    className="airline-plane-seats-row-display"
+                  >
+                    {display.map((seat) => (
+                      <div
+                        key={seat}
+                        className={`airline-plane-seats ${
+                          selectedSeat === seat ? "selected" : ""
+                        } ${occupiedSeats.includes(seat) ? "occupied" : ""}`}
+                        onClick={() => handleSeatClick(seat)}
+                      >
+                        {seat}
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
-            </div>
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "1C" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("1C")}
-              >
-                1C
+            ))}
+            {plane.name === "Airbus" &&
+            seatRowsAirbus.map((row, rowIndex) => (
+              <div key={rowIndex} className="airline-plane-seats-row">
+                {row.map((display, displayIndex) => (
+                  <div
+                    key={displayIndex}
+                    className="airline-plane-seats-row-display"
+                  >
+                    {display.map((seat) => (
+                      <div
+                        key={seat}
+                        className={`airline-plane-seats ${
+                          selectedSeat === seat ? "selected" : ""
+                        } ${occupiedSeats.includes(seat) ? "occupied" : ""}`}
+                        onClick={() => handleSeatClick(seat)}
+                      >
+                        {seat}
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "1D" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("1D")}
-              >
-                1D
-              </div>
-            </div>
+            ))}
+        </div>
+        {selectedSeat && (
+          <div className="airline-confirmation-seat-message">
+            Assento selecionado:
+            <p>{selectedSeat}</p>
           </div>
-          <div className="airline-plane-seats-row">
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "2A" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("2A")}
-              >
-                2A
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "2B" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("2B")}
-              >
-                2B
-              </div>
-            </div>
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "2C" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("2C")}
-              >
-                2C
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "2D" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("2D")}
-              >
-                2D
-              </div>
-            </div>
-          </div>
-          <div className="airline-plane-seats-row">
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "3A" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("3A")}
-              >
-                3A
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "3B" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("3B")}
-              >
-                3B
-              </div>
-            </div>
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "3C" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("3C")}
-              >
-                3C
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "3D" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("3D")}
-              >
-                3D
-              </div>
-            </div>
-          </div>
-          <div className="airline-plane-seats-row">
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "4A" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("4A")}
-              >
-                4A
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "4B" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("4B")}
-              >
-                4B
-              </div>
-            </div>
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "4C" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("4C")}
-              >
-                4C
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "4D" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("4D")}
-              >
-                4D
-              </div>
-            </div>
-          </div>
-          <div className="airline-plane-seats-row">
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "5A" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("5A")}
-              >
-                5A
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "5B" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("5B")}
-              >
-                5B
-              </div>
-            </div>
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "5C" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("5C")}
-              >
-                5C
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "5D" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("5D")}
-              >
-                5D
-              </div>
-            </div>
-          </div>
-          <div className="airline-plane-seats-row">
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "6A" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("6A")}
-              >
-                6A
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "6B" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("6B")}
-              >
-                6B
-              </div>
-            </div>
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "6C" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("6C")}
-              >
-                6C
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "6D" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("6D")}
-              >
-                6D
-              </div>
-            </div>
-          </div>
-          <div className="airline-plane-seats-row">
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "7A" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("7A")}
-              >
-                7A
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "7B" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("7B")}
-              >
-                7B
-              </div>
-            </div>
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "7C" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("7C")}
-              >
-                7C
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "7D" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("7D")}
-              >
-                7D
-              </div>
-            </div>
-          </div>
-          <div className="airline-plane-seats-row">
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "8A" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("8A")}
-              >
-                8A
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "8B" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("8B")}
-              >
-                8B
-              </div>
-            </div>
-            <div className="airline-plane-seats-row-display">
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "8C" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("8C")}
-              >
-                8C
-              </div>
-              <div
-                className={`airline-plane-seats ${
-                  selectedSeat === "8D" ? "selected" : ""
-                }`}
-                onClick={() => handleSeatClick("8D")}
-              >
-                8D
-              </div>
-            </div>
+        )}
+        <div className="airline-confirmation-seat-buttons">
+          <Link to="/client-area">
+            <div className="airline-confirmation-seat-button">Voltar</div>
+          </Link>
+          <div
+            onClick={handleConfirmSeat}
+            className={`airline-confirmation-seat-button ${
+              !selectedSeat ? "airline-confirmation-seat-button-off" : ""
+            }`}
+          >
+            Confirmar
           </div>
         </div>
-        {
-            selectedSeat && (
-                <div className="airline-confirmation-seat-message">
-                    Assento selecionado:
-                    <p>{selectedSeat}</p>
-                </div>
-            )
-        }
-        <div onClick={handleConfirmSeat} className="airline-confirmation-seat-button">Confirmar</div>
       </section>
     </main>
   );
