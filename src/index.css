@@ -761,6 +761,42 @@ html, body {
   font-size: 12px;
 }
 
+.airline-button-pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+  color: #87CEEB;
+}
+
+.airline-button-previous-page {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.airline-button-previous-page-off {
+  width: 40px;
+  height: 40px;
+  cursor: default;
+  opacity: 0.4;
+}
+
+.airline-button-next-page {
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.airline-button-next-page-off {
+  width: 40px;
+  height: 40px;
+  cursor: default;
+  margin-left: 20px;
+  opacity: 0.4;
+}
+
 .airline-all-flights-card {
    display: flex;
    justify-content: space-between;

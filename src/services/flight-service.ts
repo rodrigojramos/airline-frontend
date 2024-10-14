@@ -12,12 +12,16 @@ export function findById(id: number) {
     return axios(config);
 }
 
-export function findAll() {
+export function findAll(page: number, size = 10) {
 
     const config : AxiosRequestConfig = {
         method: "GET",
         baseURL: BASE_URL,
-        url: "/flight"
+        url: "/flight",
+        params: {
+            page,
+            size
+        }
     }
 
     return axios(config);
