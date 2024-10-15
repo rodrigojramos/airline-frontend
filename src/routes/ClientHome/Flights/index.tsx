@@ -40,6 +40,13 @@ export function Flights() {
 
     const [noBackFlightsAvailable, setNoBackFlightsAvailable] = useState(false);
 
+    const [goingFlightAvailableSeats, setGoingFlightAvailableSeats] = useState<number>(1);
+
+    const [backFlightAvailableSeats, setBackFlightAvailableSeats] = useState<number>(1);
+
+    const [goingFlightIsAvailable, setGoingFlightIsAvailable] = useState<boolean>(true);
+
+    const [backFlightIsAvailable, setBackFlightIsAvailable] = useState<boolean>(true);
 
     function handleClickConfirmation() {
         navigate("/payment", {
@@ -56,22 +63,32 @@ export function Flights() {
         flightService.findFlightsByDateAndDestination(origin, destination, Number(day1), Number(month1), Number(year1))
             .then(response => {
                 setFlights(response.data);
+                setGoingFlightAvailableSeats(response.data[0].availableSeats);
+                console.log(goingFlightAvailableSeats);
+                if(goingFlightAvailableSeats <= 0) {
+                    setGoingFlightIsAvailable(false);
+                }
                 if(response.data.length === 0) {
                     setNoGoingFlightsAvailable(true);
                 }
             })
-    }, [day1, destination, month1, origin, year1, noGoingFlightsAvailable])
+    }, [day1, destination, month1, origin, year1, noGoingFlightsAvailable, goingFlightAvailableSeats])
 
     useEffect(() => {
 
         flightService.findFlightsByDateAndDestination(destination, origin, Number(day2), Number(month2), Number(year2))
             .then(response => {
                 setBackFlights(response.data);
+                setBackFlightAvailableSeats(response.data[0].availableSeats);
+                console.log(backFlightAvailableSeats);
+                if(backFlightAvailableSeats <= 0) {
+                    setBackFlightIsAvailable(false);
+                }
                 if(response.data.length === 0) {
                     setNoBackFlightsAvailable(true);
                 }
             })
-    }, [day2, destination, month2, origin, year2])
+    }, [day2, destination, month2, origin, year2, backFlightAvailableSeats])
 
     return (
         <main className="airline-main-flights">
@@ -96,6 +113,7 @@ export function Flights() {
                                         flight={flight}
                                         isSelected={selectedGoingFlight?.id === flight.id}
                                         onSelect={setSelectedGoingFlight}
+                                        isAvailable={goingFlightIsAvailable}
                                     />
                                 )))}
                                 {
@@ -126,6 +144,7 @@ export function Flights() {
                                         flight={flight}
                                         isSelected={selectedGoingFlight?.id === flight.id}
                                         onSelect={setSelectedGoingFlight}
+                                        isAvailable={goingFlightIsAvailable}
                                     />
                                 )))}
                                 {
@@ -154,6 +173,7 @@ export function Flights() {
                                         flight={flight}
                                         isSelected={selectedBackFlight?.id === flight.id}
                                         onSelect={setSelectedBackFlight}
+                                        isAvailable={backFlightIsAvailable}
                                     />
                                 )))}
                                 {

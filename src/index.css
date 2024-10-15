@@ -235,6 +235,16 @@ html, body {
   cursor: pointer;
 }
 
+.airline-flight-sold-out {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.airline-flight-sold-out-text {
+  color: #F33;
+  font-weight: bold;
+}
+
 .airline-flight-selected-card-details {
   width: 800px;
   padding: 20px;

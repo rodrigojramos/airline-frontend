@@ -5,9 +5,10 @@ type Props = {
     flight: FlightDTO;
     isSelected: boolean;
     onSelect: (flight: FlightDTO) => void;
+    isAvailable: boolean;
 }
 
-export function FlightCard({ flight, isSelected, onSelect }: Props) {
+export function FlightCard({ flight, isSelected, onSelect, isAvailable }: Props) {
 
     const date = new Date(flight.flightDay);
 
@@ -17,8 +18,8 @@ export function FlightCard({ flight, isSelected, onSelect }: Props) {
 
     return(
         <div 
-            className={`airline-flight-card-details ${isSelected ? 'selected' : ''}`}
-            onClick={() => onSelect(flight)}
+            className={`airline-flight-card-details ${isSelected ? 'selected' : ''} ${!isAvailable ? 'airline-flight-sold-out' : ''}`}
+            onClick={() => isAvailable && onSelect(flight)}
         >
             <div className="airline-flight-card-destination">
                 <p className="padding-right-10">{flight.departure}</p>
@@ -27,6 +28,10 @@ export function FlightCard({ flight, isSelected, onSelect }: Props) {
             </div>
             <p>Horário: {time}</p>
             <p>R${flight.price}</p>
+            {
+                !isAvailable && 
+                <p className="airline-flight-sold-out-text">Esgotado</p>
+            }
         </div>
     )
 }
