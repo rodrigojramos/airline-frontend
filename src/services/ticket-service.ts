@@ -33,6 +33,15 @@ export function getTicketsByUserId(id: number) {
     return requestBackend(config);
 }
 
+export function getTicketsByFlightId(flightId: number) {
+    const config : AxiosRequestConfig = {
+        method: "GET",
+        url: `/client-area/tickets/${flightId}`,
+    }
+
+    return requestBackend(config);
+}
+
 export function updateRequest(obj: TicketDTO) {
     const config : AxiosRequestConfig = {
         method: "PUT",

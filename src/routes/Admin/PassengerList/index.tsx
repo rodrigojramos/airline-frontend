@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { PassengerCard } from "../../../components/PassengerCard";
 import * as flightService from '../../../services/flight-service';
+import * as ticketService from '../../../services/ticket-service';
 import { FlightDTO } from "../../../models/flight";
 import { useParams } from "react-router-dom";
 import moment from "moment";
-import { UserDTO } from "../../../models/user";
 import { Link } from "react-router-dom";
+import { TicketDTO } from "../../../models/ticket";
 
 export function PassengerList() {
 
@@ -13,11 +14,11 @@ export function PassengerList() {
 
     const [flight, setFlight ] = useState<FlightDTO>();
 
-    const [passengers, setPassengers] = useState<UserDTO[]>([])
-
     const date = moment(flight?.flightDay).format('DD/MM/YYYY');
 
     const time = moment(flight?.flightDay).format('HH:mm');
+
+    const [tickets, setTickets] = useState<TicketDTO[]>([]);
 
     useEffect(() => {
 
@@ -30,10 +31,10 @@ export function PassengerList() {
 
     useEffect(() => {
 
-        flightService.findPassengerList(Number(params.flightId))
+        ticketService.getTicketsByFlightId(Number(params.flightId))
             .then(response => {
                 console.log(response);
-                setPassengers(response.data);
+                setTickets(response.data);
             })
     }, [])
 
@@ -57,8 +58,8 @@ export function PassengerList() {
                         </div>
                         <div className="airline-passenger-list-flight">
                             {
-                                passengers.map((passenger => (
-                                    <PassengerCard key={passenger.id} passenger={passenger}/>
+                                tickets.map((ticket => (
+                                    <PassengerCard key={ticket.id} ticket={ticket}/>
                                 )))
                             }
                         </div>

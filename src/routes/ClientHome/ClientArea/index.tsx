@@ -25,6 +25,10 @@ export function ClientArea() {
       });
   }, []);
 
+  function formatCPF(cpf: string): string {
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+  }
+
   return (
     <main className="airline-main-client">
       <section className="airline-section-client-data">
@@ -52,7 +56,7 @@ export function ClientArea() {
             <p>CPF:</p>
             <input
               type="text"
-              value={user?.document || ""}
+              value={user?.document ? formatCPF(user.document) : ""}
               id="disabledInput"
               disabled
             />

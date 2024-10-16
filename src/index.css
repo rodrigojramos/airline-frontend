@@ -984,6 +984,13 @@ html, body {
   justify-content: center;
 }
 
+.airline-passenger-list-name p {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .airline-passenger-list-flight-destination {
   display: flex;
   justify-content: center;

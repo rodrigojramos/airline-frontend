@@ -1,17 +1,21 @@
-import { UserDTO } from "../../models/user";
+import { TicketDTO } from "../../models/ticket";
 
 type Props = {
-    passenger: UserDTO;
+    ticket: TicketDTO;
 }
 
-export function PassengerCard({ passenger }: Props) {
+export function PassengerCard({ ticket }: Props) {
+
+    function formatCPF(cpf: string): string {
+        return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    }
 
     return(
         <div className="airline-passenger-list-card-name">
             <div className="airline-passenger-list-name">
-                <p>{passenger.name}</p>
-                <p>CPF: {passenger.document}</p>
-                <p>Poltrona: 9C</p>
+                <p>{ticket.passenger.name}</p>
+                <p>{formatCPF(ticket.passenger.document)}</p>
+                <p>Assento: {ticket.seat ? ticket.seat : "Não definido"}</p>
             </div>
         </div>
     )
