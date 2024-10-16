@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import * as userService from "../../../services/user-service";
 import * as ticketService from "../../../services/ticket-service";
 import { TicketDTO } from "../../../models/ticket";
+import { Link } from "react-router-dom";
 
 type LocationState = {
     selectedGoingFlight: FlightDTO;
@@ -50,12 +51,48 @@ export function Payment() {
 
     const [user, setUser] = useState<UserDTO>();
 
+    const [messageDuplicateFlight, setMessageDuplicateFlight] = useState<string>("");
+
+    const [isFlightDuplicated, setIsFlightDuplicate] = useState<boolean>(false);
+
     useEffect(() => {
         userService.findMe()
-        .then(response => {
-            setUser(response.data);
+            .then(response => {
+                setUser(response.data);
         })
     }, [])
+
+    useEffect(() => {
+        if (user) {
+            ticketService.getTicketsByUserId(Number(user.id))
+                .then(response => {
+                    const userTickets = response.data;
+    
+                    const isGoingFlightAlreadyBought = userTickets.some((ticket: TicketDTO) =>
+                        ticket.flights.some(flight => flight.id === selectedGoingFlight.id)
+                    );
+    
+                    const isBackFlightAlreadyBought = selectedBackFlight 
+                        ? userTickets.some((ticket: TicketDTO) =>
+                            ticket.flights.some(flight => flight.id === selectedBackFlight.id)
+                          )
+                        : false;
+    
+                    if (isGoingFlightAlreadyBought && isBackFlightAlreadyBought) {
+                        setMessageDuplicateFlight("Você já comprou ambas passagens.");
+                        setIsFlightDuplicate(true);
+                    } else if (isGoingFlightAlreadyBought) {
+                        setMessageDuplicateFlight("Você já comprou este voo de ida");
+                        setIsFlightDuplicate(true);
+                    } else if (isBackFlightAlreadyBought) {
+                        setMessageDuplicateFlight("Você já comprou este voo de volta");
+                        setIsFlightDuplicate(true);
+                    } else {
+                        setIsFlightDuplicate(false);
+                    }
+                });
+        }
+    }, [user, selectedGoingFlight, selectedBackFlight]);
 
     function handleConfirmationPayment() {
         if (user) {
@@ -159,9 +196,24 @@ export function Payment() {
                         <p className="airline-user">{user?.document}</p>
                     </div>
                 </div>
-                <div onClick={handleConfirmationPayment} className="airline-button">
-                    <p>Confirmar pagamento</p>
-                </div>
+                {
+                    isFlightDuplicated ? (
+                        <div className="airline-duplicate-flight">
+                            <div className="ariline-message-duplicate-flight">
+                                {messageDuplicateFlight}
+                            </div>
+                            <Link to="/">
+                                <div className="airline-button">
+                                    <p>Voltar</p>
+                                </div>
+                            </Link>
+                        </div>
+                    ) : (
+        <               div onClick={handleConfirmationPayment} className="airline-button">
+                            <p>Confirmar pagamento</p>
+                        </div>
+                    )
+                }
             </section>
         </main>
     )

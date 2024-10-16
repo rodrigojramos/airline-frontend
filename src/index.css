@@ -390,6 +390,26 @@ html, body {
   border-radius: 8px;
 }
 
+.airline-duplicate-flight {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.ariline-message-duplicate-flight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #F33;
+  width: 300px;
+  border: 1px solid #F33;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 12px;
+}
+
 /*--------------buy-confirmation------------*/
 
 .airline-buy-confirmation-text {

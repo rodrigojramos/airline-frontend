@@ -29,7 +29,6 @@ export function MinFlightCard({ ticket }: Props) {
     const hoursDifference = timeDifference / (1000 * 60 * 60);
 
     setOldPassage(hoursDifference <= 0);
-    console.log(oldPassage);
     setIsCheckInAvailable(hoursDifference <= 72 && hoursDifference > 0);
   },[ticket.flights])
 
