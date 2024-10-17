@@ -35,7 +35,8 @@ export function updateRequest(obj: PlaneDTO) {
     const config : AxiosRequestConfig = {
         method: "PUT",
         url: `/plane/${obj.id}`,
-        data: obj
+        data: obj,
+        withCredentials: true
     }
 
     return requestBackend(config);
@@ -45,7 +46,8 @@ export function insertRequest(obj: PlaneDTO) {
     const config : AxiosRequestConfig = {
         method: "POST",
         url: "/plane",
-        data: obj
+        data: obj,
+        withCredentials: true
     }
 
     return requestBackend(config);
